@@ -2,9 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 
 const initialState = {
-    data: {}
-};
-
+    collapsed: false
+}
 // // createAsyncThunk这个API可以用来设置异步方法,我们可以通过这个API来让redux支持异步。
 export const post_data_async: any = createAsyncThunk(
     "post/data",
@@ -19,8 +18,8 @@ const layoutSlice = createSlice({
     initialState,
     reducers: {
         //同步修改state
-        set_data(state, actions) {
-            state.data = actions.payload;
+        setCollapsed(state) {
+            state.collapsed = !state.collapsed;
         },
     },
     //extraReducers字段可以让slice处理在其他地方定义的action
@@ -33,16 +32,16 @@ const layoutSlice = createSlice({
             .addCase(post_data_async.rejected, (state) => {
                 console.log('异步请求失败!')
             })
-            .addCase(post_data_async.fulfilled, (state, action) => {
-                state.data = action.payload;
-            })
+            // .addCase(post_data_async.fulfilled, (state, action) => {
+            //     state.data = action.payload;
+            // })
 
     },
 });
 
-export const { set_data } = layoutSlice.actions;
+export const { setCollapsed } = layoutSlice.actions;
 
-export const select_data = (state: RootState) => {
-    return state.layout.data;
+export const selectCollapsed = (state: RootState) => {
+    return state.layout.collapsed;
 };
 export default layoutSlice.reducer;
