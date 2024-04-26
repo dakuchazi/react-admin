@@ -1,5 +1,5 @@
 import '@/App.css';
-import LayoutCp from '@/views/layout';
+import LayoutCp from '@/views/Layout';
 
 function App() {
   return (

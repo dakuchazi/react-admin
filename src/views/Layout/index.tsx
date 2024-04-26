@@ -3,6 +3,7 @@ import { Layout, theme } from "antd";
 import SiderCp from "./Sider";
 import HeaderCp from "./Header";
 import TagsView from "./TagsView";
+import Home from "../Home";
 
 import "./index.scss";
 
@@ -30,7 +31,7 @@ const LayoutCp: React.FC = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+          <Home />
         </Content>
       </Layout>
     </Layout>
