@@ -6,16 +6,14 @@ import {
   FileWordOutlined,
   HomeOutlined,
   LinkOutlined,
-  MailOutlined,
   MessageOutlined,
   SaveOutlined,
-  SettingOutlined,
   SignatureOutlined,
   SolutionOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
-import AvatarCp from "./Avatar";
+import AvatarCp from './Avatar'
 import Sider from "antd/es/layout/Sider";
 import { useAppSelector } from "@/store";
 import { selectCollapsed } from "@/store/slices/layoutSlice";

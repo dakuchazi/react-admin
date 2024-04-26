@@ -3,7 +3,8 @@ import { selectCollapsed, setCollapsed } from "@/store/slices/layoutSlice";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, theme } from "antd";
 import { Header } from "antd/es/layout/layout";
-import BreadCrumbCp from "./BreadCrumbCp/index";
+import BreadCrumbCp from "./BreadCrumbCp";
+
 
 import "./index.scss";
 

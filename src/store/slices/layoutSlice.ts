@@ -32,9 +32,9 @@ const layoutSlice = createSlice({
             .addCase(post_data_async.rejected, (state) => {
                 console.log('异步请求失败!')
             })
-            // .addCase(post_data_async.fulfilled, (state, action) => {
-            //     state.data = action.payload;
-            // })
+        // .addCase(post_data_async.fulfilled, (state, action) => {
+        //     state.data = action.payload;
+        // })
 
     },
 });

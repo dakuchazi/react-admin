@@ -1,9 +1,8 @@
 import avatar from "@/assets/images/avatar.jpg";
+
 import "./index.scss";
 
-
 export default function AvatarCp() {
-
     return (
         <div className="sidebar-avatar-container">
             <img src={avatar} className="sidebar-avatar" alt="logo" />
