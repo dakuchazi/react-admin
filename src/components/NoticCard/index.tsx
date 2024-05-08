@@ -1,121 +1,129 @@
-import { Input, Message } from '@arco-design/web-react';
-import { IconLoading } from '@arco-design/web-react/icon';
-import { useMount, useRequest, useResetState } from 'ahooks';
-import classNames from 'classnames';
-import React, { useState } from 'react';
-import { flushSync } from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+// @ts-nocheck
 
-import { selectNotice } from '@/redux/selectors';
-import { setNotice } from '@/redux/slices/notice';
-import { getWhereDataAPI } from '@/utils/apis/getWhereData';
-import { updateDataAPI } from '@/utils/apis/updateData';
-import { _, isAdmin } from '@/utils/cloudBase';
-import { failText, noticeId, visitorText } from '@/utils/constant';
-import { DB } from '@/utils/dbConfig';
+// import { Input, Message } from '@arco-design/web-react';
+// import { IconLoading } from '@arco-design/web-react/icon';
+// import { useMount, useRequest, useResetState } from 'ahooks';
+// import classNames from 'classnames';
+// import React, { useState } from 'react';
+// import { flushSync } from 'react-dom';
+// import { useDispatch, useSelector } from 'react-redux';
 
-import CustomModal from '../CustomModal';
-import Emoji from '../Emoji';
-import style from './index.module.scss';
+// import { selectNotice } from '@/redux/selectors';
+// import { setNotice } from '@/redux/slices/notice';
+// import { getWhereDataAPI } from '@/utils/apis/getWhereData';
+// import { updateDataAPI } from '@/utils/apis/updateData';
+// import { _, isAdmin } from '@/utils/cloudBase';
+// import { failText, noticeId, visitorText } from '@/utils/constant';
+// import { DB } from '@/utils/dbConfig';
 
-const { TextArea } = Input;
+// import CustomModal from '../CustomModal';
+// import Emoji from '../Emoji';
+// import style from './index.module.scss';
 
-const NoticeCard: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [notice, setLocalNotice, resetLocalNotice] = useResetState('');
+// const { TextArea } = Input;
 
-    const reduxNotice = useSelector(selectNotice);
-    const dispatch = useDispatch();
+// const NoticeCard: React.FC = () => {
+//     const [isModalOpen, setIsModalOpen] = useState(false);
+//     const [notice, setLocalNotice, resetLocalNotice] = useResetState('');
 
-    const { loading, run } = useRequest(
-        () => getWhereDataAPI(DB.Notice, { _id: _.eq(noticeId) }),
-        {
-            retryCount: 3,
-            manual: true,
-            onSuccess: res => {
-                dispatch(setNotice(res.data[0].notice));
-            }
-        }
-    );
+//     const reduxNotice = useSelector(selectNotice);
+//     const dispatch = useDispatch();
 
-    useMount(() => {
-        if (!reduxNotice.isDone) {
-            run();
-        }
-    });
+//     const { loading, run } = useRequest(
+//         () => getWhereDataAPI(DB.Notice, { _id: _.eq(noticeId) }),
+//         {
+//             retryCount: 3,
+//             manual: true,
+//             onSuccess: res => {
+//                 dispatch(setNotice(res.data[0].notice));
+//             }
+//         }
+//     );
 
-    const openModal = () => {
-        setIsModalOpen(true);
-        setLocalNotice(reduxNotice.value);
-    };
+//     useMount(() => {
+//         if (!reduxNotice.isDone) {
+//             run();
+//         }
+//     });
 
-    const modalCancel = () => {
-        setIsModalOpen(false);
-        resetLocalNotice();
-    };
+//     const openModal = () => {
+//         setIsModalOpen(true);
+//         setLocalNotice(reduxNotice.value);
+//     };
 
-    const modalOk = () => {
-        if (!notice) {
-            Message.warning('请输入公告内容~');
-            return;
-        }
-        if (!isAdmin()) {
-            Message.warning(visitorText);
-            return;
-        }
-        updateDataAPI(DB.Notice, noticeId, { notice }).then(res => {
-            if (!res.success && !res.permission) {
-                Message.warning(visitorText);
-            } else if (res.success && res.permission) {
-                Message.success('修改成功！');
-                modalCancel();
-                flushSync(() => run());
-            } else {
-                Message.warning(failText);
-            }
-        });
-    };
+//     const modalCancel = () => {
+//         setIsModalOpen(false);
+//         resetLocalNotice();
+//     };
 
-    const render = () => (
-        <>
-            <TextArea
-                placeholder='请输入公告内容'
-                maxLength={21 * 4}
-                allowClear
-                showWordLimit
-                value={notice}
-                onChange={value => setLocalNotice(value)}
-                autoSize={false}
-                style={{
-                    height: 100,
-                    resize: 'none'
-                }}
-            />
-            <Emoji style={{ marginTop: 10 }} />
-        </>
-    );
+//     const modalOk = () => {
+//         if (!notice) {
+//             Message.warning('请输入公告内容~');
+//             return;
+//         }
+//         if (!isAdmin()) {
+//             Message.warning(visitorText);
+//             return;
+//         }
+//         updateDataAPI(DB.Notice, noticeId, { notice }).then(res => {
+//             if (!res.success && !res.permission) {
+//                 Message.warning(visitorText);
+//             } else if (res.success && res.permission) {
+//                 Message.success('修改成功！');
+//                 modalCancel();
+//                 flushSync(() => run());
+//             } else {
+//                 Message.warning(failText);
+//             }
+//         });
+//     };
 
-    return (
-        <>
-            <div className={style.cardBox}>
-                <div className={style.title}>公告</div>
-                <div
-                    className={classNames(style.noticeText, { [style.loading]: loading })}
-                    onClick={openModal}
-                >
-                    {loading ? <IconLoading /> : reduxNotice.value}
-                </div>
-            </div>
-            <CustomModal
-                isEdit={true}
-                isModalOpen={isModalOpen}
-                DBType={DB.Notice}
-                modalOk={modalOk}
-                modalCancel={modalCancel}
-                render={render}
-            />
-        </>
-    );
-};
+//     const render = () => (
+//         <>
+//             <TextArea
+//                 placeholder='请输入公告内容'
+//                 maxLength={21 * 4}
+//                 allowClear
+//                 showWordLimit
+//                 value={notice}
+//                 onChange={value => setLocalNotice(value)}
+//                 autoSize={false}
+//                 style={{
+//                     height: 100,
+//                     resize: 'none'
+//                 }}
+//             />
+//             <Emoji style={{ marginTop: 10 }} />
+//         </>
+//     );
 
-export default NoticeCard;
+//     return (
+//         <>
+//             <div className={style.cardBox}>
+//                 <div className={style.title}>公告</div>
+//                 <div
+//                     className={classNames(style.noticeText, { [style.loading]: loading })}
+//                     onClick={openModal}
+//                 >
+//                     {loading ? <IconLoading /> : reduxNotice.value}
+//                 </div>
+//             </div>
+//             <CustomModal
+//                 isEdit={true}
+//                 isModalOpen={isModalOpen}
+//                 DBType={DB.Notice}
+//                 modalOk={modalOk}
+//                 modalCancel={modalCancel}
+//                 render={render}
+//             />
+//         </>
+//     );
+// };
+
+// export default NoticeCard;
+
+import React from "react";
+
+export default function index() {
+  return <div>index</div>;
+}

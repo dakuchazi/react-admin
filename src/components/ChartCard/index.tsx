@@ -1,57 +1,71 @@
-import { IconLoading } from '@arco-design/web-react/icon';
-import classNames from 'classnames';
-import { PieChart } from 'echarts/charts';
-import { LegendComponent, TitleComponent, TooltipComponent } from 'echarts/components';
-import * as echarts from 'echarts/core';
-import { LabelLayout } from 'echarts/features';
-import { CanvasRenderer } from 'echarts/renderers';
-import ReactEChartsCore from 'echarts-for-react/lib/core';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// @ts-nocheck
 
-import { useChartData } from './config';
-import style from './index.module.scss';
+// import classNames from "classnames";
+// import { PieChart } from "echarts/charts";
+// import {
+//   LegendComponent,
+//   TitleComponent,
+//   TooltipComponent,
+// } from "echarts/components";
+// import * as echarts from "echarts/core";
+// import { LabelLayout } from "echarts/features";
+// import { CanvasRenderer } from "echarts/renderers";
+// import ReactEChartsCore from "echarts-for-react/lib/core";
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
 
-echarts.use([
-    TitleComponent,
-    TooltipComponent,
-    LegendComponent,
-    PieChart,
-    CanvasRenderer,
-    LabelLayout
-]);
+// import { useChartData } from "./config";
+// import style from "./index.module.scss";
+// import { LoadingOutlined } from "@ant-design/icons";
 
-const ChartCard: React.FC = () => {
-    const { option, loading } = useChartData();
+// echarts.use([
+//   TitleComponent,
+//   TooltipComponent,
+//   LegendComponent,
+//   PieChart,
+//   CanvasRenderer,
+//   LabelLayout,
+// ]);
 
-    const navigate = useNavigate();
+// const ChartCard: React.FC = () => {
+//   const { option, loading } = useChartData();
 
-    const onEvents = {
-        click: (params: any) => {
-            const classText = params.data.name;
-            navigate(`/admin/article?searchClass=${encodeURIComponent(classText)}`);
-        }
-    };
+//   const navigate = useNavigate();
 
-    return (
-        <div className={classNames(style.chartBox, { [style.loadingCenter]: loading })}>
-            <div className={style.chartTitle}>文章概览</div>
-            {loading ? (
-                <IconLoading className={style.loading} />
-            ) : (
-                <ReactEChartsCore
-                    style={{
-                        height: '100%'
-                    }}
-                    echarts={echarts}
-                    option={option}
-                    notMerge={true}
-                    lazyUpdate={true}
-                    onEvents={onEvents}
-                />
-            )}
-        </div>
-    );
-};
+//   const onEvents = {
+//     click: (params: any) => {
+//       const classText = params.data.name;
+//       navigate(`/admin/article?searchClass=${encodeURIComponent(classText)}`);
+//     },
+//   };
 
-export default ChartCard;
+//   return (
+//     <div
+//       className={classNames(style.chartBox, { [style.loadingCenter]: loading })}
+//     >
+//       <div className={style.chartTitle}>文章概览</div>
+//       {loading ? (
+//         <LoadingOutlined className={style.loading} />
+//       ) : (
+//         <ReactEChartsCore
+//           style={{
+//             height: "100%",
+//           }}
+//           echarts={echarts}
+//           option={option}
+//           notMerge={true}
+//           lazyUpdate={true}
+//           onEvents={onEvents}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default ChartCard;
+
+import React from "react";
+
+export default function index() {
+  return <div>index</div>;
+}
