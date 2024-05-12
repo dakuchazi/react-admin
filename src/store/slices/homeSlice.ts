@@ -10,12 +10,22 @@ const initialState = {
     { title: "友链数", total: 0 },
     { title: "日志数", total: 0 },
   ],
-  loading: false,
+  Cardloading: false,
+  typeData: [],
 };
 
 // // createAsyncThunk这个API可以用来设置异步方法,我们可以通过这个API来让redux支持异步。
 //获取首页卡片的数据
 export const getCardDataAsync = createAsyncThunk(
+  "get/CardData",
+  async (params, api) => {
+    const res: any = await getCardDataRequest();
+    return res;
+  }
+);
+
+//获取首页分类列表的数据
+export const getTypesListRequest = createAsyncThunk(
   "get/CardData",
   async (params, api) => {
     const res: any = await getCardDataRequest();
@@ -38,14 +48,25 @@ const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCardDataAsync.pending, (state) => {
-        state.loading = true;
+        state.Cardloading = true;
       })
       .addCase(getCardDataAsync.rejected, (state) => {
-        state.loading = false;
+        state.Cardloading = false;
       })
       .addCase(getCardDataAsync.fulfilled, (state, action) => {
         state.cardData = action.payload;
-        state.loading = false;
+        state.Cardloading = false;
+      })
+
+      .addCase(getTypesListRequest.pending, (state) => {
+        state.Cardloading = true;
+      })
+      .addCase(getTypesListRequest.rejected, (state) => {
+        state.Cardloading = false;
+      })
+      .addCase(getTypesListRequest.fulfilled, (state, action) => {
+        state.typeData = action.payload;
+        state.Cardloading = false;
       });
   },
 });
@@ -55,7 +76,7 @@ export const selectCardData = (state: RootState) => {
 };
 
 export const selectLoading = (state: RootState) => {
-  return state.home.loading;
+  return state.home.Cardloading;
 };
 
 export default homeSlice.reducer;
