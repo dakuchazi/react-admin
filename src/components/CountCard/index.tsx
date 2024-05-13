@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import classNames from "classnames";
 import style from "./index.module.scss";
 import { LoadingOutlined } from "@ant-design/icons";

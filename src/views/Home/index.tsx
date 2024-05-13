@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import ChartCard from '@/components/ChartCard';
+import ChartCard from "@/components/ChartCard";
 // import ClassCard from '@/components/ClassCrad';
 // import NoticeCard from '@/components/NoticCard';
 import CountCard from "@/components/CountCard";
@@ -10,13 +10,13 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import {
   getCardDataAsync,
   selectCardData,
-  selectLoading,
+  selectCardLoading,
 } from "@/store/slices/homeSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const cardData = useAppSelector(selectCardData);
-  const countCardLoading = useAppSelector(selectLoading);
+  const countCardLoading = useAppSelector(selectCardLoading);
 
   useEffect(() => {
     dispatch(getCardDataAsync());
@@ -27,12 +27,20 @@ export default function Home() {
       {/* 统计卡片区 */}
       <div className={style.countCardContainer}>
         {cardData.map((item) => {
-          return <CountCard isLoading={countCardLoading} data={item} />;
+          return (
+            <CountCard
+              isLoading={countCardLoading}
+              data={item}
+              key={item.title}
+            />
+          );
         })}
       </div>
       {/* 扇形图、分类、标签、公告 */}
       <div className={style.homeBigContainer}>
-        <div className={style.chartContainer}>{/* <ChartCard /> */}</div>
+        <div className={style.chartContainer}>
+          <ChartCard />
+        </div>
         <div className={style.classesContainer}>{/* <ClassCard /> */}</div>
         <div className={style.tagsNoticeContainer}>
           <div className={style.NoticeContainer}>{/* <NoticeCard /> */}</div>

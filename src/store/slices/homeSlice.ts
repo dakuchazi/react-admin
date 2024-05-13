@@ -3,21 +3,22 @@ import { getCardDataRequest } from "@/utils/api";
 import type { RootState } from "../index";
 
 const initialState = {
-  cardData: [
+  countCardData: [
     { title: "文章数", total: 0 },
     { title: "说说数", total: 0 },
     { title: "留言数", total: 0 },
     { title: "友链数", total: 0 },
     { title: "日志数", total: 0 },
   ],
-  Cardloading: false,
+  countCardLoading: false,
   typeData: [],
+  typeCardLoading: false,
 };
 
 // // createAsyncThunk这个API可以用来设置异步方法,我们可以通过这个API来让redux支持异步。
 //获取首页卡片的数据
 export const getCardDataAsync = createAsyncThunk(
-  "get/CardData",
+  "get/countCardData",
   async (params, api) => {
     const res: any = await getCardDataRequest();
     return res;
@@ -26,7 +27,7 @@ export const getCardDataAsync = createAsyncThunk(
 
 //获取首页分类列表的数据
 export const getTypesListRequest = createAsyncThunk(
-  "get/CardData",
+  "get/typeCardData",
   async (params, api) => {
     const res: any = await getCardDataRequest();
     return res;
@@ -48,35 +49,40 @@ const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCardDataAsync.pending, (state) => {
-        state.Cardloading = true;
+        state.countCardLoading = true;
       })
       .addCase(getCardDataAsync.rejected, (state) => {
-        state.Cardloading = false;
+        state.countCardLoading = false;
       })
       .addCase(getCardDataAsync.fulfilled, (state, action) => {
-        state.cardData = action.payload;
-        state.Cardloading = false;
+        state.countCardData = action.payload;
+        state.countCardLoading = false;
       })
 
       .addCase(getTypesListRequest.pending, (state) => {
-        state.Cardloading = true;
+        state.typeCardLoading = true;
       })
       .addCase(getTypesListRequest.rejected, (state) => {
-        state.Cardloading = false;
+        state.typeCardLoading = false;
       })
       .addCase(getTypesListRequest.fulfilled, (state, action) => {
         state.typeData = action.payload;
-        state.Cardloading = false;
+        state.typeCardLoading = false;
       });
   },
 });
 
 export const selectCardData = (state: RootState) => {
-  return state.home.cardData;
+  return state.home.countCardData;
 };
-
-export const selectLoading = (state: RootState) => {
-  return state.home.Cardloading;
+export const selectTypesData = (state: RootState) => {
+  return state.home.typeData;
+};
+export const selectCountCardLoading = (state: RootState) => {
+  return state.home.countCardLoading;
+};
+export const selectCardLoading = (state: RootState) => {
+  return state.home.typeCardLoading;
 };
 
 export default homeSlice.reducer;

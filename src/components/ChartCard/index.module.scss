@@ -1,4 +1,4 @@
-@import '../CountCard/index.scss';
+@import '../CountCard/index.module.scss';
 
 .cardBase {
     position: relative;
@@ -10,7 +10,6 @@
 
 .chartBox {
     @extend .cardBase;
-
     .loading {
         font-size: 60px;
         color: $themeColor3_light;

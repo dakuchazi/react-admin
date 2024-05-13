@@ -1,58 +1,31 @@
-import { useMount, useRequest } from "ahooks";
-
-import { setClasses } from "@/redux/slices/classes";
-import { getDataAPI } from "@/utils/apis/getData";
-
-interface ClassType {
-  class: string;
-  count: number;
-  _id: string;
-  _openid: string;
-}
+import { useAppDispatch, useAppSelector } from "@/store";
+import {
+  getTypesListRequest,
+  selectCardLoading,
+  selectTypesData,
+} from "@/store/slices/homeSlice";
+import { useEffect } from "react";
 
 export const useChartData = () => {
-  const classes = useSelector(selectClass);
-  const articles = useSelector(selectArticle);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const typeData = useAppSelector(selectTypesData);
+  const typeCardLoading = useAppSelector(selectCardLoading);
 
-  const formatData = (classData: ClassType[], total: number) => {
-    if (classData === undefined || total === undefined) return [];
-    let sum = 0;
-
-    const res = classData
-      .filter((obj) => obj.count !== 0)
-      .map((obj) => {
-        sum += obj.count;
-        return { name: obj.class, value: obj.count };
-      });
-    const leave = total - sum;
-    leave &&
-      res.push({
-        name: "未分类",
-        value: leave,
-      });
-    return res;
+  const format = (chartData: any) => {
+    const tmeArr = chartData.map((item: any) => {
+      return { name: item.name, value: item.count };
+    });
+    return tmeArr;
   };
 
-  const { loading: dataLoading, run: classRun } = useRequest(
-    () => getDataAPI(DB.Class),
-    {
-      retryCount: 3,
-      manual: true,
-      onSuccess: (res) => {
-        dispatch(setClasses(res.data));
-      },
+  useEffect(() => {
+    if (!typeCardLoading) {
+      dispatch(getTypesListRequest());
     }
-  );
-
-  useMount(() => {
-    if (!classes.isDone) {
-      classRun();
-    }
-  });
+  }, []);
 
   return {
-    loading: dataLoading,
+    loading: typeCardLoading,
     option: {
       tooltip: {
         trigger: "item",
@@ -66,7 +39,7 @@ export const useChartData = () => {
           type: "pie",
           radius: "80%",
           height: "100%",
-          data: formatData(classes.value, articles.count.value),
+          data: format(typeData),
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
