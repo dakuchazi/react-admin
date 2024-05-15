@@ -26,7 +26,7 @@ export const getCardDataAsync = createAsyncThunk(
 );
 
 //获取首页分类列表的数据
-export const getTypesListRequest = createAsyncThunk(
+export const getTypesListAsync = createAsyncThunk(
   "get/typeCardData",
   async (params, api) => {
     const res: any = await getCardDataRequest();
@@ -59,13 +59,13 @@ const homeSlice = createSlice({
         state.countCardLoading = false;
       })
 
-      .addCase(getTypesListRequest.pending, (state) => {
+      .addCase(getTypesListAsync.pending, (state) => {
         state.typeCardLoading = true;
       })
-      .addCase(getTypesListRequest.rejected, (state) => {
+      .addCase(getTypesListAsync.rejected, (state) => {
         state.typeCardLoading = false;
       })
-      .addCase(getTypesListRequest.fulfilled, (state, action) => {
+      .addCase(getTypesListAsync.fulfilled, (state, action) => {
         state.typeData = action.payload;
         state.typeCardLoading = false;
       });

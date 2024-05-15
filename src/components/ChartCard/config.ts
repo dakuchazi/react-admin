@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/store";
 import {
-  getTypesListRequest,
+  getTypesListAsync,
   selectCardLoading,
   selectTypesData,
 } from "@/store/slices/homeSlice";
@@ -19,9 +19,10 @@ export const useChartData = () => {
   };
 
   useEffect(() => {
-    if (!typeCardLoading) {
-      dispatch(getTypesListRequest());
-    }
+
+    dispatch(getTypesListAsync());
+
+
   }, []);
 
   return {

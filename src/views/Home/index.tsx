@@ -20,6 +20,8 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getCardDataAsync());
+    console.log('====123====');
+
   }, []);
 
   return (
