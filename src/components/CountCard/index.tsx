@@ -5,7 +5,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 interface Props {
   data: {
     title: string;
-    total: number;
+    total: number | null;
   };
   isLoading: boolean;
 }
@@ -17,7 +17,7 @@ export default function CountCard(props: Props) {
     <div className={classNames(style.countCardBox)}>
       <div className={style.key}>{data.title}</div>
       <div className={classNames(style.value, { [style.loading]: isLoading })}>
-        {isLoading ? <LoadingOutlined /> : data.total}
+        {isLoading ? < LoadingOutlined /> : data.total}
       </div>
     </div>
   );

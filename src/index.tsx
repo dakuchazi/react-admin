@@ -14,7 +14,7 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <Router>
-      <ConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
+      <ConfigProvider theme={{ token: { colorPrimary: '#1677FF' } }}>
         <App />
       </ConfigProvider>
     </Router>
