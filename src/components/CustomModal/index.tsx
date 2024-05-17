@@ -5,13 +5,15 @@ import style from './index.module.scss';
 import { Input, Modal } from 'antd';
 
 interface Props {
+  title: string
   isEdit: boolean;
   isModalOpen: boolean;
   modalOk: () => void;
   modalCancel: () => void;
-  // dataFilter?: DataFilterProps[];
+  dataFilter?: [];
   addText?: string;
   updateText?: string;
+  confirmLoading?: boolean
   render?: () => React.ReactNode;
 }
 
@@ -20,7 +22,9 @@ const CustomModal: React.FC<Props> = ({
   isModalOpen,
   modalOk,
   modalCancel,
+  title,
   // dataFilter = [],
+  confirmLoading,
   addText = '添加',
   updateText = '更新',
   render
@@ -42,12 +46,13 @@ const CustomModal: React.FC<Props> = ({
       title={
         <ModalTitle
           isEdit={isEdit}
-          title='测试title'
+          title={title}
           addText={addText}
           updateText={updateText}
         />
       }
-      visible={isModalOpen}
+      confirmLoading={confirmLoading}
+      open={isModalOpen}
       onOk={modalOk}
       onCancel={modalCancel}
     >

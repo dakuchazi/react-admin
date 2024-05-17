@@ -54,3 +54,11 @@ export const addTypeRequest = (parmas: { name: string }) => {
     resovle(res)
   }) as Promise<AxiosData>
 };
+
+//更新分类 /api/types/updateType
+export const updateTypeRequest = (parmas: { name: string, _id: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/types/updateType", parmas);
+    resovle(res)
+  }) as Promise<AxiosData>
+};

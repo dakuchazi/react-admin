@@ -2,16 +2,14 @@ import { useRequest, useResetState } from 'ahooks';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import CustomModal from '../CustomModal';
 import style from './index.module.scss';
 import { Input, Button, Popconfirm, message } from 'antd';
 import { DeleteOutlined, EditOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { getTypesListAsync, selectCardLoading, selectTypesData } from '@/store/slices/homeSlice';
-import { addTypeRequest, deleteTypeRequest } from '@/utils/api';
+import { addTypeRequest, deleteTypeRequest, updateTypeRequest } from '@/utils/api';
 
 const { Search } = Input;
 
@@ -20,13 +18,12 @@ const ClassCard: React.FC = () => {
   const typeData = useAppSelector(selectTypesData);
   const typeCardLoading = useAppSelector(selectCardLoading);
   const [messageApi, contextHolder] = message.useMessage();
-
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [id, setId] = useState('');
-  const [oldClassText, setOldClassText] = useState('');
-  const [classText, setClassText] = useState('');
-  const [newClassText, setNewClassText, resetNewClassText] = useResetState('');
+  const [updatetypeName, setUpdateTypeName] = useState('');
+  const [oldTypeName, setOldTypeName] = useResetState('');
+  const [newTypeName, setNewTypeName, resetNewTypeName] = useResetState('');
 
   const { loading: deleteClassloading, run: deleteClassRun } = useRequest(deleteTypeRequest, {
     manual: true,
@@ -41,10 +38,24 @@ const ClassCard: React.FC = () => {
     }
   })
 
-  const openModal = (id: string) => {
+  const { loading: updateTypeLoading, run: updateTypeRun } = useRequest(updateTypeRequest, {
+    manual: true,
+    onSuccess: (res) => {
+      if (res.code === '200') {
+        messageApi.success("太好了，修改成功");
+        modalCancel();
+        dispatch(getTypesListAsync())
+      } else {
+        messageApi.error("出错了，修改失败");
+      }
+    }
+  })
+
+  const openModal = (id: string, name: string) => {
     setIsModalOpen(true);
     setId(id);
-
+    setOldTypeName(name)
+    setUpdateTypeName(name)
   };
 
   const modalCancel = () => {
@@ -56,23 +67,32 @@ const ClassCard: React.FC = () => {
   };
 
   const addNewClass = async () => {
-    if (!newClassText) {
+    if (!newTypeName) {
       messageApi.warning('请输入分类名称~');
       return;
     }
-    const res = await addTypeRequest({ name: newClassText })
+    const res = await addTypeRequest({ name: newTypeName })
     if (res.code === '200') {
       messageApi.success("太好了，新增成功");
       dispatch(getTypesListAsync())
+      resetNewTypeName()
     } else {
       messageApi.error(res.message);
     }
-    resetNewClassText()
+
   }
 
   const deleteClass = async (id: string) => {
     deleteClassRun({ _id: id })
   }
+
+  const modalOk = () => {
+    if (!updatetypeName) {
+      messageApi.warning('请输入分类名称~');
+      return;
+    }
+    updateTypeRun({ _id: id, name: updatetypeName })
+  };
   return (
     <>
       {contextHolder}
@@ -82,8 +102,8 @@ const ClassCard: React.FC = () => {
           allowClear
           placeholder='新建分类'
           enterButton='创建'
-          value={newClassText}
-          onChange={(e) => setNewClassText(e.target.value)}
+          value={newTypeName}
+          onChange={(e) => setNewTypeName(e.target.value)}
           onSearch={addNewClass}
         />
         <div className={classNames(style.classesBox, { [style.classLoading]: typeCardLoading })}>
@@ -103,7 +123,7 @@ const ClassCard: React.FC = () => {
                 <div key={_id} className={style.classItem}>
                   <div className={style.count}>{count}</div>
                   <div className={style.classTextBox}>
-                    <div className={style.classText} onClick={() => toArticle(classText)}>
+                    <div className={style.classText} onClick={() => toArticle(_id)}>
                       {name}
                     </div>
                   </div>
@@ -111,7 +131,7 @@ const ClassCard: React.FC = () => {
                     type='primary'
                     className={style.classBtn}
                     icon={<EditOutlined />}
-                    onClick={() => openModal(_id)}
+                    onClick={() => openModal(_id, name)}
                     disabled={_id === '6bd0f56b664140aa000c4fa00bdeb852' || deleteClassloading}
                   />
                   <Popconfirm
@@ -136,18 +156,20 @@ const ClassCard: React.FC = () => {
           )}
         </div>
       </div>
-      {/* <CustomModal
+      {<CustomModal
+        title={oldTypeName}
         isEdit={true}
         isModalOpen={isModalOpen}
+        confirmLoading={updateTypeLoading}
         modalOk={modalOk}
         modalCancel={modalCancel}
         render={() => (
           <Input
-            value={classText}
-            onChange={value => setClassText(value)}
+            value={updatetypeName}
+            onChange={(e) => setUpdateTypeName(e.target.value)}
           />
         )}
-      /> */}
+      />}
     </>
   );
 }
