@@ -1,17 +1,19 @@
 import { useAppDispatch, useAppSelector } from "@/store";
+import {} from "@/store/slices/homeSlice";
 import {
-  getTypesListAsync,
-  selectCardLoading,
-  selectTypesData,
-} from "@/store/slices/homeSlice";
+  getTypeListAsync,
+  selectTypeData,
+  selectTypeLoading,
+} from "@/store/slices/typeSlice";
 import { useEffect } from "react";
 
 export const useChartData = () => {
   const dispatch = useAppDispatch();
-  const typeData = useAppSelector(selectTypesData);
-  const typeCardLoading = useAppSelector(selectCardLoading);
+  const typeData = useAppSelector(selectTypeData);
+  const typeCardLoading = useAppSelector(selectTypeLoading);
 
   const format = (chartData: any) => {
+    if (chartData.length === 0) return;
     const tmeArr = chartData.map((item: any) => {
       return { name: item.name, value: item.count };
     });
@@ -19,10 +21,7 @@ export const useChartData = () => {
   };
 
   useEffect(() => {
-
-    dispatch(getTypesListAsync());
-
-
+    dispatch(getTypeListAsync());
   }, []);
 
   return {

@@ -3,62 +3,124 @@ import axios from "./axios";
 // 与后台约定的业务数据规范
 type AxiosData<T = any> = {
   message: string;
-  code: string,
-  data: T,
-}
+  code: string;
+  data: T;
+};
 
 //响应拦截器返回来的res的type
 type AxiosRes<T = AxiosData> = {
-  config: Object,
-  data: T,
-  headers: any,
-  request: any,
-  status: number,
-  statusText: string
-}
-
-
+  config: Object;
+  data: T;
+  headers: any;
+  request: any;
+  status: number;
+  statusText: string;
+};
 
 //获取首页4个卡片的数据 /api/home/getCardData
-export type CardData = {
-  title: string,
-  total: number | null
-}
-export const getCardDataRequest = () => {
+export type CountData = {
+  title: string;
+  total: number | null;
+};
+export const getCountDataRequest = () => {
   return new Promise(async (resovle, reject) => {
-    const res: AxiosData<CardData[]> = await axios.get("/api/home/getCardData");
+    const res: AxiosData<CountData[]> = await axios.get(
+      "/api/home/getCountData"
+    );
     resovle(res.data);
-  }) as Promise<CardData[]>
+  }) as Promise<CountData[]>;
 };
 
-//获取所有的分类列表 /api/types/getTypeList
-export const getTypesListRequest = () => {
+//获取所有的分类列表 /api/type/getTypeList
+export type TypeData = {
+  _id: string;
+  name: string;
+  createDate: string;
+  count: number;
+};
+export const getTypeListRequest = () => {
   return new Promise(async (resovle, reject) => {
-    const res: AxiosData = await axios.get("/api/types/getTypeList");
+    const res: AxiosData<TypeData[]> = await axios.get("/api/type/getTypeList");
     resovle(res.data);
-  });
+  }) as Promise<TypeData[]>;
 };
 
-//删除分类 /api/types/deleteType
+//删除分类 /api/type/deleteType
 export const deleteTypeRequest = (parmas: { _id: string }) => {
   return new Promise(async (resovle, reject) => {
-    const res: AxiosData = await axios.post("/api/types/deleteType", parmas);
-    resovle(res)
-  }) as Promise<AxiosData>
+    const res: AxiosData = await axios.post("/api/type/deleteType", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
 };
 
-//添加分类 /api/types/deleteType
+//添加分类 /api/type/addType
 export const addTypeRequest = (parmas: { name: string }) => {
   return new Promise(async (resovle, reject) => {
-    const res: AxiosData = await axios.post("/api/types/addType", parmas);
-    resovle(res)
-  }) as Promise<AxiosData>
+    const res: AxiosData = await axios.post("/api/type/addType", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
 };
 
-//更新分类 /api/types/updateType
-export const updateTypeRequest = (parmas: { name: string, _id: string }) => {
+//更新分类 /api/type/updateType
+export const updateTypeRequest = (parmas: { name: string; _id: string }) => {
   return new Promise(async (resovle, reject) => {
-    const res: AxiosData = await axios.post("/api/types/updateType", parmas);
-    resovle(res)
-  }) as Promise<AxiosData>
+    const res: AxiosData = await axios.post("/api/type/updateType", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//获取公告列表 /api/notice/getNoticeList
+export const getNoticeListRequest = () => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.get("/api/notice/getNoticeList");
+    resovle(res.data);
+  }) as Promise<AxiosData>;
+};
+
+//更新公告 /api/notice/updateNotice
+export const updateNoticeRequest = (parmas: {
+  content: string;
+  _id: string;
+}) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/notice/updateNotice", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//获取所有的标签列表 /api/tag/getTagList
+export type TagData = {
+  _id: string;
+  name: string;
+  createDate: string;
+};
+export const getTagListRequest = () => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<TypeData[]> = await axios.get("/api/tag/getTagList");
+    resovle(res.data);
+  }) as Promise<TagData[]>;
+};
+
+//删除分类 /api/tag/deleteTag
+export const deleteTagRequest = (parmas: { _id: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/tag/deleteTag", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//添加分类 /api/tag/addTag
+export const addTagRequest = (parmas: { name: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/tag/addTag", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//更新分类 /api/tag/updateTag
+export const updateTagRequest = (parmas: { name: string; _id: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/tag/updateTag", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
 };

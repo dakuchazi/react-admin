@@ -1,19 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getCardDataRequest, getTypesListRequest } from "@/utils/api";
+import { getCountDataRequest } from "@/utils/api";
 import type { RootState } from "../index";
 
 const initialState = {
-  typeData: [],
-  typeCardLoading: true,
+  countData: [
+    { title: "文章数", total: null },
+    { title: "说说数", total: null },
+    { title: "留言数", total: null },
+    { title: "友链数", total: null },
+    { title: "日志数", total: null },
+  ],
+  countDataLoading: true,
 };
 
 // // createAsyncThunk这个API可以用来设置异步方法,我们可以通过这个API来让redux支持异步。
 
 //获取首页分类列表的数据
-export const getTypesListAsync = createAsyncThunk(
-  "get/typeCardData",
+export const getCountDataAsync = createAsyncThunk(
+  "get/countData",
   async (params, api) => {
-    const res: any = await getTypesListRequest();
+    const res: any = await getCountDataRequest();
     return res;
   }
 );
@@ -32,23 +38,22 @@ const homeSlice = createSlice({
   //pengding rejected 可以用来处理等待和失败
   extraReducers: (builder) => {
     builder
-      .addCase(getTypesListAsync.rejected, (state) => {
-        state.typeCardLoading = false;
+      .addCase(getCountDataAsync.rejected, (state) => {
+        state.countDataLoading = false;
       })
-      .addCase(getTypesListAsync.fulfilled, (state, action) => {
-        state.typeData = action.payload;
-        state.typeCardLoading = false;
+      .addCase(getCountDataAsync.fulfilled, (state, action) => {
+        state.countData = action.payload;
+        state.countDataLoading = false;
       });
   },
 });
 
-
-export const selectTypesData = (state: RootState) => {
-  return state.home.typeData;
+export const selectCountData = (state: RootState) => {
+  return state.home.countData;
 };
 
-export const selectCardLoading = (state: RootState) => {
-  return state.home.typeCardLoading;
+export const selectCountLoading = (state: RootState) => {
+  return state.home.countDataLoading;
 };
 
 export default homeSlice.reducer;
