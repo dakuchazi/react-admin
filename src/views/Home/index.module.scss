@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-}
+} 
 
 .homeBigContainer {
     height: calc(100% - 160px - 10px);
@@ -13,25 +13,30 @@
         height: 100%;
         flex: 2;
         margin-right: 10px;
+        box-shadow:  0 3px 6px rgba(0, 21, 41, 0.08);
     }
 
     .classesContainer {
         height: 100%;
         flex: 1;
         margin-right: 10px;
+        box-shadow:  0 3px 6px rgba(0, 21, 41, 0.08);
     }
 
     .tagsNoticeContainer {
         height: 100%;
         flex: 1;
+        box-shadow:  0 3px 6px rgba(0, 21, 41, 0.08);
 
         .NoticeContainer {
             height: 160px;
             margin-bottom: 10px;
+            box-shadow:  0 3px 6px rgba(0, 21, 41, 0.08);
         }
 
         .tagsContainer {
             height: calc(100% - 160px - 10px);
+            box-shadow:  0 3px 6px rgba(0, 21, 41, 0.08);
         }
     }
 }

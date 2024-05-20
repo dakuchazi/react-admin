@@ -9,12 +9,13 @@ import * as echarts from "echarts/core";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
 import ReactEChartsCore from "echarts-for-react/lib/core";
-import React from "react";
+import React, { LegacyRef, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useChartData } from "./config";
 import style from "./index.module.scss";
 import { LoadingOutlined } from "@ant-design/icons";
+import EChartsReactCore from "echarts-for-react/lib/core";
 
 echarts.use([
   TitleComponent,
@@ -27,15 +28,25 @@ echarts.use([
 
 const ChartCard: React.FC = () => {
   const { option, loading } = useChartData();
-
   const navigate = useNavigate();
-
+  const echartRef = useRef<EChartsReactCore>(null);
   const onEvents = {
     click: (params: any) => {
       const classText = params.data.name;
       navigate(`/admin/article?searchClass=${encodeURIComponent(classText)}`);
     },
   };
+
+  useEffect(() => {
+    const resizeChart = () => {
+      echartRef.current?.getEchartsInstance()?.resize();
+    };
+    window.addEventListener("resize", resizeChart);
+    // 在组件卸载时，移除事件监听器
+    return () => {
+      window.removeEventListener("resize", resizeChart);
+    };
+  }, []);
 
   return (
     <div
@@ -46,8 +57,10 @@ const ChartCard: React.FC = () => {
         <LoadingOutlined className={style.loading} />
       ) : (
         <ReactEChartsCore
+          ref={echartRef}
           style={{
             height: "100%",
+            width: "100%",
           }}
           echarts={echarts}
           option={option}

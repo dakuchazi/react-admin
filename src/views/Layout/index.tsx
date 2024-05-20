@@ -17,9 +17,9 @@ const LayoutCp: React.FC = () => {
   return (
     <Layout>
       <SiderCp />
-      <Layout>
+      <Layout className="layout__right">
         <HeaderCp />
-        <div className="layout-tagsView--wrap">
+        <div className="layout__tagsView--wrap">
           <TagsView />
         </div>
         <Content
