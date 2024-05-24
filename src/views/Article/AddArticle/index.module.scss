@@ -1,0 +1,63 @@
+@import '../../../styles/base.scss';
+@import '../../../styles/style.scss';
+
+.addArticleHeader {
+  height: 110px;
+  padding: 14px;
+  background-color: #fff;
+  border-radius: 2px;
+  margin-bottom: 15px;
+  box-shadow:  0 0px 5px 5px rgba(0, 21, 41, 0.08);
+
+  .top,
+  .bottom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .top {
+    margin-bottom: 10px;
+
+    .chineseTitle {
+      flex: 1;
+      margin-right: 10px;
+    }
+  }
+
+  .bottom {
+    .classText,
+    .tags,
+    .time {
+      flex: 1;
+    }
+
+    .tags {
+      flex: 2;
+      margin: 0 10px;
+    }
+  }
+}
+
+.contentEdit {
+  height: calc(100% - (102px + 24px));
+  display: flex;
+  box-shadow:  0 0px 5px 5px rgba(0, 21, 41, 0.08);
+  background-color: #f2f3f5;
+
+  .markedEdit {
+    height: 100%;
+    width: 50%;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: #fff;
+    overflow-y: auto;
+    @extend .scroll;
+  }
+
+  .input {
+    margin-right: 10px;
+    padding: 30px;
+    font-size: 18px;
+  }
+}

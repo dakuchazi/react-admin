@@ -3,9 +3,9 @@ import { Layout, theme } from "antd";
 import SiderCp from "./Sider";
 import HeaderCp from "./Header";
 import TagsView from "./TagsView";
-import Home from "../Home";
 
 import "./index.scss";
+import { Outlet } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -24,14 +24,14 @@ const LayoutCp: React.FC = () => {
         </div>
         <Content
           style={{
-            margin: "24px 16px 24px",
+            margin: "16px",
             padding: 24,
             height: "calc(100% - 100px)",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
         >
-          <Home />
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

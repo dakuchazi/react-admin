@@ -124,3 +124,105 @@ export const updateTagRequest = (parmas: { name: string; _id: string }) => {
     resovle(res);
   }) as Promise<AxiosData>;
 };
+
+//获取文章列表 /api/article/getArticleList
+export type ArticleData = {
+  list:
+    | {
+        _id: string;
+        createDate: string;
+        title: string;
+        type: string;
+        tags: string;
+      }[]
+    | [];
+  total: number;
+};
+
+export const getArticleListRequest = (params: {
+  title?: string;
+  tags?: string[];
+  type?: string;
+  pagesize: number;
+  current: number;
+}) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<ArticleData> = await axios.post(
+      "/api/article/getArticleList",
+      params
+    );
+    resovle(res.data);
+  }) as Promise<ArticleData>;
+};
+
+//删除文章 /api/article/deleteArticle
+export const deleteArticleRequest = (parmas: { _id: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post(
+      "/api/article/deleteArticle",
+      parmas
+    );
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//添加文章 /api/article/addArticle
+type AddArticleParams = {
+  title: string;
+  title2?: string;
+  createDate?: string;
+  content: string;
+  typeId?: string;
+  tags?: string[];
+};
+
+export const addArticleRequest = (parmas: AddArticleParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/article/addArticle", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//查询文章详情 /api/article/getArticleDetail
+type ArticleDetailParams = {
+  _id: string;
+};
+
+export type ArticleDetailData = {
+  title: string;
+  title2?: string;
+  createDate: string;
+  content: string;
+  typeId: string;
+  tags?: string[];
+};
+export const getArticleDetailRequest = (parmas: ArticleDetailParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<ArticleDetailData> = await axios.post(
+      "/api/article/getArticleDetail",
+      parmas
+    );
+    resovle(res);
+  }) as Promise<AxiosData<ArticleDetailData>>;
+};
+
+//更新文章 /api/article/addArticle
+type UpdateArticleParams = {
+  title: string;
+  title2?: string;
+  createDate?: string;
+  content: string;
+  typeId?: string;
+  tags?: string[];
+  _id: string;
+};
+
+export const updateArticleRequest = (parmas: UpdateArticleParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post(
+      "/api/article/updateArticle",
+      parmas
+    );
+    resovle(res);
+  }) as Promise<AxiosData>;
+};

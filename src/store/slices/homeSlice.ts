@@ -2,17 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getCountDataRequest } from "@/utils/api";
 import type { RootState } from "../index";
 
-const initialState = {
-  countData: [
-    { title: "文章数", total: null },
-    { title: "说说数", total: null },
-    { title: "留言数", total: null },
-    { title: "友链数", total: null },
-    { title: "日志数", total: null },
-  ],
-  countDataLoading: true,
-};
-
 // // createAsyncThunk这个API可以用来设置异步方法,我们可以通过这个API来让redux支持异步。
 
 //获取首页分类列表的数据
@@ -23,6 +12,17 @@ export const getCountDataAsync = createAsyncThunk(
     return res;
   }
 );
+
+const initialState = {
+  countData: [
+    { title: "文章数", total: null },
+    { title: "说说数", total: null },
+    { title: "留言数", total: null },
+    { title: "友链数", total: null },
+    { title: "日志数", total: null },
+  ],
+  countDataLoading: true,
+};
 
 const homeSlice = createSlice({
   name: "home",
