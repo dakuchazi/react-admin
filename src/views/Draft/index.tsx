@@ -1,24 +1,9 @@
-import "./index.custom.scss";
-
 import { useRequest, useSetState } from "ahooks";
 import React, { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import MyTable from "@/components/MyTable";
-import PageHeader from "@/components/PageHeader";
-import s from "./index.module.scss";
-import {
-  Button,
-  Input,
-  Popconfirm,
-  Select,
-  TableColumnsType,
-  Tag,
-  message,
-} from "antd";
+import { Button, Popconfirm, TableColumnsType, Tag, message } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { selectTypeData } from "@/store/slices/typeSlice";
-import { selectTagData } from "@/store/slices/tagSlice";
 import {
   getArticleListAsync,
   selectArticleData,
@@ -27,29 +12,21 @@ import {
 import { deleteArticleRequest } from "@/utils/api";
 import TableTag from "@/components/TableTag";
 
-const Article: React.FC = () => {
+import "./index.custom.scss";
+
+const Draft: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const typeData = useAppSelector(selectTypeData);
-  const tagData = useAppSelector(selectTagData);
   const articleData = useAppSelector(selectArticleData);
   const articleLoading = useAppSelector(selectArticleLoading);
   const [messageApi, contextHolder] = message.useMessage();
+
   const [pageParams, setPageParams] = useSetState<{
     pagesize: number;
     current: number;
   }>({
     pagesize: 10,
     current: 1,
-  });
-
-  const [searchParmas, setSearchParams] = useSetState<{
-    title?: string;
-    tags: string[];
-    typeId?: string;
-  }>({
-    title: "",
-    tags: [],
   });
 
   const { loading: deleteLoading, run: deleteRun } = useRequest(
@@ -71,9 +48,7 @@ const Article: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(
-      getArticleListAsync({ ...searchParmas, ...pageParams, isDraft: false })
-    );
+    dispatch(getArticleListAsync({ ...pageParams, isDraft: true }));
   }, [pageParams]);
 
   const handleEdit = (id: string) => {
@@ -85,12 +60,6 @@ const Article: React.FC = () => {
     //   Message.warning(visitorText);
     //   return;
     deleteRun({ _id: id });
-  };
-
-  const search = () => {
-    dispatch(
-      getArticleListAsync({ ...searchParmas, ...pageParams, isDraft: false })
-    );
   };
 
   const columns: TableColumnsType = [
@@ -157,89 +126,9 @@ const Article: React.FC = () => {
     },
   ];
 
-  const render = () => (
-    <div className={s.searchBox}>
-      <div className={s.search}>
-        <Input
-          size="large"
-          allowClear
-          style={{ flex: 1, marginRight: 10 }}
-          className="articleInputBox"
-          placeholder="输入文章标题"
-          value={searchParmas.title}
-          onChange={(e) => setSearchParams({ title: e.target.value })}
-          onPressEnter={search}
-        />
-        <Select
-          size="large"
-          placeholder="请选择文章分类"
-          style={{ flex: 1, marginRight: 10 }}
-          showSearch
-          allowClear
-          value={searchParmas.typeId}
-          optionFilterProp="label"
-          onChange={(value) => setSearchParams({ typeId: value })}
-          options={typeData.map(
-            ({ name, _id }: { name: string; _id: string }) => ({
-              label: name,
-              value: _id,
-            })
-          )}
-        />
-
-        <Select
-          size="large"
-          placeholder="请选择文章标签"
-          style={{ flex: 2, marginRight: 10 }}
-          maxTagCount={4}
-          mode="multiple"
-          showSearch
-          allowClear
-          value={searchParmas.tags}
-          optionFilterProp="label"
-          onChange={(value) => setSearchParams({ tags: value })}
-          options={tagData.map(
-            ({ name, _id }: { name: string; _id: string }) => ({
-              label: name,
-              value: _id,
-            })
-          )}
-        />
-      </div>
-      <div>
-        <Button
-          type="primary"
-          size="large"
-          onClick={search}
-          style={{ fontSize: 16, marginRight: 10 }}
-        >
-          搜索
-        </Button>
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => {
-            setSearchParams({
-              title: "",
-              tags: [],
-            });
-          }}
-          style={{ fontSize: 16 }}
-        >
-          清除
-        </Button>
-      </div>
-    </div>
-  );
-
   return (
     <>
       {contextHolder}
-      <PageHeader
-        text="写文章"
-        onClick={() => navigate(`/addArticle`)}
-        render={render}
-      />
       {
         <MyTable
           loading={articleLoading}
@@ -260,4 +149,4 @@ const Article: React.FC = () => {
   );
 };
 
-export default Article;
+export default Draft;

@@ -7,6 +7,7 @@ import noticeReducer from "./slices/noticeSlice";
 import typeReducer from "./slices/typeSlice";
 import tagReducer from "./slices/tagSlice";
 import articleReducer from "./slices/articleSlice";
+import postReducer from "./slices/postSilice";
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
@@ -25,6 +26,7 @@ export const store = configureStore({
     type: typeReducer,
     tag: tagReducer,
     article: articleReducer,
+    post: postReducer,
   },
 });
 

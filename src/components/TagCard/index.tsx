@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { useColor } from "./config";
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -137,8 +137,8 @@ const TagCard: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <div className={style.cardBox}>
-        <div className={style.title}>标签</div>
+      <div className={s.cardBox}>
+        <div className={s.title}>标签</div>
         <Search
           allowClear
           placeholder="新建标签"
@@ -148,8 +148,8 @@ const TagCard: React.FC = () => {
           onSearch={addNewTag}
         />
         <div
-          className={classNames(style.tagsBox, {
-            [style.tagLoading]: tagLoading,
+          className={classNames(s.tagsBox, {
+            [s.tagLoading]: tagLoading,
           })}
         >
           {tagLoading ? (
@@ -159,13 +159,13 @@ const TagCard: React.FC = () => {
               ({ _id, name }: { _id: string; name: string }, index: number) => (
                 <div
                   key={_id}
-                  className={style.tagItem}
+                  className={s.tagItem}
                   style={{ backgroundColor: tagColor[index % colorLen] }}
                   onDoubleClick={() => toArticle(_id)}
                 >
                   {name}
                   <EditOutlined
-                    className={style.iconBtn}
+                    className={s.iconBtn}
                     onClick={() => openModal(_id, name)}
                   />
                   <Popconfirm
@@ -175,7 +175,7 @@ const TagCard: React.FC = () => {
                     okText="Yes"
                     cancelText="No"
                   >
-                    <DeleteOutlined className={style.iconBtn} />
+                    <DeleteOutlined className={s.iconBtn} />
                   </Popconfirm>
                 </div>
               )

@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 // import { DataFilterProps } from '@/utils/hooks/useTableData';
-import ModalTitle from '../ModalTitle';
-import style from './index.module.scss';
-import { Input, Modal } from 'antd';
+import ModalTitle from "../ModalTitle";
+import style from "./index.module.scss";
+import { Input, Modal } from "antd";
 
 interface Props {
-  title: string
+  title: string;
   isEdit: boolean;
   isModalOpen: boolean;
   modalOk: () => void;
@@ -13,7 +13,7 @@ interface Props {
   dataFilter?: [];
   addText?: string;
   updateText?: string;
-  confirmLoading?: boolean
+  confirmLoading?: boolean;
   render?: () => React.ReactNode;
 }
 
@@ -25,22 +25,10 @@ const CustomModal: React.FC<Props> = ({
   title,
   // dataFilter = [],
   confirmLoading,
-  addText = '添加',
-  updateText = '更新',
-  render
+  addText = "添加",
+  updateText = "更新",
+  render,
 }) => {
-  // const dataFilterRes = () =>
-  //   dataFilter.map(({ text, data, setData }, index) => (
-  //     <Input
-  //       size='large'
-  //       key={index}
-  //       addBefore={text}
-  //       value={data as string}
-  //       onChange={value => setData(value)}
-  //       className={style.modalInput}
-  //     />
-  //   ));
-
   return (
     <Modal
       title={

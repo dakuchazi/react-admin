@@ -1,7 +1,7 @@
 import copy from "copy-to-clipboard";
 import React from "react";
 
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 import { message } from "antd";
 
 interface Props {
@@ -16,7 +16,7 @@ const EmojiItem: React.FC<Props> = ({ emojis }) => {
       {contextHolder}
       {emojis.map((item: string, index: number) => (
         <div
-          className={style.emoji}
+          className={s.emoji}
           key={index}
           onClick={() => copy(item) && messageApi.success("已复制到剪切板!")}
         >

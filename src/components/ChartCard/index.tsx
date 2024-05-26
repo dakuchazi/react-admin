@@ -13,7 +13,7 @@ import React, { LegacyRef, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useChartData } from "./config";
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 import { LoadingOutlined } from "@ant-design/icons";
 import EChartsReactCore from "echarts-for-react/lib/core";
 
@@ -49,12 +49,10 @@ const ChartCard: React.FC = () => {
   }, []);
 
   return (
-    <div
-      className={classNames(style.chartBox, { [style.loadingCenter]: loading })}
-    >
-      <div className={style.chartTitle}>文章概览</div>
+    <div className={classNames(s.chartBox, { [s.loadingCenter]: loading })}>
+      <div className={s.chartTitle}>文章概览</div>
       {loading ? (
-        <LoadingOutlined className={style.loading} />
+        <LoadingOutlined className={s.loading} />
       ) : (
         <ReactEChartsCore
           ref={echartRef}

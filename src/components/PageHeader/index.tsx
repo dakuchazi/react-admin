@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import { Button } from "antd";
 
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 
 interface Props {
   text: string;
@@ -11,7 +11,7 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ text, onClick, render }) => {
   return (
-    <div className={style.pageHeaderBox}>
+    <div className={s.pageHeaderBox}>
       <Button type="primary" size="large" onClick={() => onClick()}>
         {text}
       </Button>

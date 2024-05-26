@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 import { LoadingOutlined } from "@ant-design/icons";
 
 interface Props {
@@ -14,10 +14,10 @@ export default function CountCard(props: Props) {
   const { data, isLoading } = props;
 
   return (
-    <div className={classNames(style.countCardBox)}>
-      <div className={style.key}>{data.title}</div>
-      <div className={classNames(style.value, { [style.loading]: isLoading })}>
-        {isLoading ? < LoadingOutlined /> : data.total}
+    <div className={classNames(s.countCardBox)}>
+      <div className={s.key}>{data.title}</div>
+      <div className={classNames(s.value, { [s.loading]: isLoading })}>
+        {isLoading ? <LoadingOutlined /> : data.total}
       </div>
     </div>
   );

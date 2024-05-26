@@ -1,7 +1,7 @@
 import React from "react";
 import { Tag } from "antd";
 
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 
 interface Props {
   tags: string[];
@@ -25,14 +25,14 @@ const COLORS = [
 
 const TableTag: React.FC<Props> = ({ tags }) => {
   return (
-    <div className={style.tableTag}>
+    <div className={s.tableTag}>
       {tags.map((tag, index) => {
         return (
           <Tag
             key={index}
             color={COLORS[tag.length % COLORS.length]}
             bordered
-            className={style.tagItem}
+            className={s.tagItem}
           >
             {tag}
           </Tag>

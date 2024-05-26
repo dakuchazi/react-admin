@@ -5,7 +5,7 @@ import NoticeCard from "@/components/NoticCard";
 import CountCard from "@/components/CountCard";
 import TagCard from "@/components/TagCard";
 
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 import { useAppDispatch, useAppSelector } from "@/store";
 import {
   getCountDataAsync,
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       {/* 统计卡片区 */}
-      <div className={style.countCardContainer}>
+      <div className={s.countCardContainer}>
         {countData.map((item) => {
           return (
             <CountCard isLoading={countLoading} data={item} key={item.title} />
@@ -33,14 +33,14 @@ export default function Home() {
         })}
       </div>
       {/* 扇形图、分类、标签、公告 */}
-      <div className={style.homeBigContainer}>
-        <div className={style.chartContainer}>
+      <div className={s.homeBigContainer}>
+        <div className={s.chartContainer}>
           <ChartCard />
         </div>
-        <div className={style.classesContainer}>{<ClassCard />}</div>
-        <div className={style.tagsNoticeContainer}>
-          <div className={style.NoticeContainer}>{<NoticeCard />}</div>
-          <div className={style.tagsContainer}>{<TagCard />}</div>
+        <div className={s.classesContainer}>{<ClassCard />}</div>
+        <div className={s.tagsNoticeContainer}>
+          <div className={s.NoticeContainer}>{<NoticeCard />}</div>
+          <div className={s.tagsContainer}>{<TagCard />}</div>
         </div>
       </div>
     </>

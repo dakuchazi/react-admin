@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../CustomModal";
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 import { Input, Button, Popconfirm, message } from "antd";
 import {
   DeleteOutlined,
@@ -121,8 +121,8 @@ const ClassCard: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <div className={style.cardBox}>
-        <div className={style.title}>分类</div>
+      <div className={s.cardBox}>
+        <div className={s.title}>分类</div>
         <Search
           allowClear
           placeholder="新建分类"
@@ -132,8 +132,8 @@ const ClassCard: React.FC = () => {
           onSearch={addNewClass}
         />
         <div
-          className={classNames(style.classesBox, {
-            [style.classLoading]: typeLoading,
+          className={classNames(s.classesBox, {
+            [s.classLoading]: typeLoading,
           })}
         >
           {typeLoading ? (
@@ -150,19 +150,16 @@ const ClassCard: React.FC = () => {
                 name: string;
                 count: number;
               }) => (
-                <div key={_id} className={style.classItem}>
-                  <div className={style.count}>{count}</div>
-                  <div className={style.classTextBox}>
-                    <div
-                      className={style.classText}
-                      onClick={() => toArticle(_id)}
-                    >
+                <div key={_id} className={s.classItem}>
+                  <div className={s.count}>{count}</div>
+                  <div className={s.classTextBox}>
+                    <div className={s.classText} onClick={() => toArticle(_id)}>
                       {name}
                     </div>
                   </div>
                   <Button
                     type="primary"
-                    className={style.classBtn}
+                    className={s.classBtn}
                     icon={<EditOutlined />}
                     onClick={() => openModal(_id, name)}
                     disabled={
@@ -181,7 +178,7 @@ const ClassCard: React.FC = () => {
                       style={{ width: 30, height: 30 }}
                       type="primary"
                       danger
-                      className={style.classBtn}
+                      className={s.classBtn}
                       icon={<DeleteOutlined />}
                       disabled={
                         _id === "6bd0f56b664140aa000c4fa00bdeb852" ||

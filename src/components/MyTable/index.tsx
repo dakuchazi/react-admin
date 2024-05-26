@@ -4,7 +4,7 @@ import React from "react";
 import { Pagination, Table } from "antd";
 import type { TableColumnsType } from "antd";
 
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 
 interface Props {
   loading: boolean;
@@ -28,9 +28,7 @@ const MyTable: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <div
-        className={classNames(style.myTableBox, { [style.noHeader]: noHeader })}
-      >
+      <div className={classNames(s.myTableBox, { [s.noHeader]: noHeader })}>
         <Table
           bordered
           loading={loading}
@@ -38,11 +36,11 @@ const MyTable: React.FC<Props> = ({
           dataSource={data}
           rowKey={(columns) => columns._id}
           showSorterTooltip={false}
-          className={style.myTable}
+          className={s.myTable}
           pagination={false}
         />
       </div>
-      <div className={style.paginationBox}>
+      <div className={s.paginationBox}>
         <Pagination
           current={current}
           total={total}

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import CustomModal from "../CustomModal";
 import Emoji from "../Emoji";
-import style from "./index.module.scss";
+import s from "./index.module.scss";
 import { updateNoticeRequest } from "@/utils/api";
 import { useAppDispatch, useAppSelector } from "@/store";
 import {
@@ -97,11 +97,11 @@ const NoticeCard: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <div className={style.cardBox}>
-        <div className={style.title}>公告</div>
+      <div className={s.cardBox}>
+        <div className={s.title}>公告</div>
         <div
-          className={classNames(style.noticeText, {
-            [style.loading]: noticeLoading,
+          className={classNames(s.noticeText, {
+            [s.loading]: noticeLoading,
           })}
           onClick={openModal}
         >
