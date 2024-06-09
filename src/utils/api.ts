@@ -228,12 +228,12 @@ export const updateArticleRequest = (parmas: UpdateArticleParams) => {
 };
 
 //添加说说 /api/post/addPost
-type AddPsotParams = {
+type AddPostParams = {
   createDate: string;
   content: string;
   imgs: string[];
 };
-export const addPostRequest = (parmas: AddPsotParams) => {
+export const addPostRequest = (parmas: AddPostParams) => {
   return new Promise(async (resovle, reject) => {
     const res: AxiosData = await axios.post("/api/post/addPost", parmas);
     resovle(res);
@@ -285,4 +285,68 @@ export const getPostListRequest = (params: {
     );
     resovle(res.data);
   }) as Promise<PostData>;
+};
+
+//添加友链 /api/link/addLink
+type AddLinkParams = {
+  createDate?: string;
+  name: string;
+  link: string;
+  avatar: string;
+  description: string;
+};
+export const addLinkRequest = (parmas: AddLinkParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/link/addLink", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//删除友链 /api/link/deleteLink
+export const deleteLinkRequest = (parmas: { _id: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/link/deleteLink", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//更新友链 /api/link/updateLink
+type UpdateLinkParams = {
+  createDate?: string;
+  name: string;
+  link: string;
+  avatar: string;
+  description: string;
+  _id: string;
+};
+export const updateLinkRequest = (parmas: UpdateLinkParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/link/updateLink", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//获取友链列表 /api/link/getLinkList
+export type LinkData = {
+  list:
+    | {
+        _id: string;
+        createDate: string;
+        content: string;
+        imgs: string[];
+      }[]
+    | [];
+  total: number;
+};
+export const getLinkListRequest = (params: {
+  pagesize: number;
+  current: number;
+}) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<LinkData> = await axios.post(
+      "/api/link/getLinkList",
+      params
+    );
+    resovle(res.data);
+  }) as Promise<LinkData>;
 };

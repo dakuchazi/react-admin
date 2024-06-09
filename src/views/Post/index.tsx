@@ -20,7 +20,7 @@ import {
   getPostListAsync,
   selectPostData,
   selectPostLoading,
-} from "@/store/slices/postSilice";
+} from "@/store/slices/postSlice";
 
 import s from "./index.module.scss";
 import { FileImageOutlined } from "@ant-design/icons";
@@ -117,12 +117,9 @@ const Say: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const clearData = () => {};
-
   const modalCancel = () => {
     setIsModalOpen(false);
     setIsEdit(false);
-    clearData();
   };
 
   const handleEdit = (record: {
