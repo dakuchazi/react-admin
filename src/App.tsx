@@ -7,6 +7,8 @@ import Home from "./views/Home";
 import AddArticle from "./views/Article/AddArticle";
 import Draft from "./views/Draft";
 import Post from "./views/Post";
+import Link from "./views/Link";
+import Comment from "./views/Comment";
 
 import "./global.custom.scss";
 
@@ -22,6 +24,8 @@ function App() {
           <Route path="/addArticle" element={<AddArticle />}></Route>
           <Route path="/draft" element={<Draft />}></Route>
           <Route path="/post" element={<Post />}></Route>
+          <Route path="/link" element={<Link />}></Route>
+          <Route path="/comment" element={<Comment />}></Route>
         </Route>
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>

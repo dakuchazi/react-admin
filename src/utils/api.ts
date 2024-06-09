@@ -128,14 +128,14 @@ export const updateTagRequest = (parmas: { name: string; _id: string }) => {
 //获取文章列表 /api/article/getArticleList
 export type ArticleData = {
   list:
-    | {
-        _id: string;
-        createDate: string;
-        title: string;
-        type: string;
-        tags: string;
-      }[]
-    | [];
+  | {
+    _id: string;
+    createDate: string;
+    title: string;
+    type: string;
+    tags: string;
+  }[]
+  | [];
   total: number;
 };
 export const getArticleListRequest = (params: {
@@ -265,13 +265,13 @@ export const updatePostRequest = (parmas: UpdatePostParams) => {
 //获取说说列表 /api/post/getPostList
 export type PostData = {
   list:
-    | {
-        _id: string;
-        createDate: string;
-        content: string;
-        imgs: string[];
-      }[]
-    | [];
+  | {
+    _id: string;
+    createDate: string;
+    content: string;
+    imgs: string[];
+  }[]
+  | [];
   total: number;
 };
 export const getPostListRequest = (params: {
@@ -329,13 +329,13 @@ export const updateLinkRequest = (parmas: UpdateLinkParams) => {
 //获取友链列表 /api/link/getLinkList
 export type LinkData = {
   list:
-    | {
-        _id: string;
-        createDate: string;
-        content: string;
-        imgs: string[];
-      }[]
-    | [];
+  | {
+    _id: string;
+    createDate: string;
+    content: string;
+    imgs: string[];
+  }[]
+  | [];
   total: number;
 };
 export const getLinkListRequest = (params: {
@@ -350,3 +350,67 @@ export const getLinkListRequest = (params: {
     resovle(res.data);
   }) as Promise<LinkData>;
 };
+
+//获取留言列表 /api/comment/getCommentList
+export type CommentData = {
+  list:
+  | {
+    _id: string;
+    createDate: string;
+    content: string;
+    imgs: string[];
+  }[]
+  | [];
+  total: number;
+};
+export const getCommentListRequest = (params: {
+  pagesize: number;
+  current: number;
+}) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<CommentData> = await axios.post(
+      "/api/comment/getCommentList",
+      params
+    );
+    resovle(res.data);
+  }) as Promise<CommentData>;
+};
+
+//删除友链 /api/comment/deleteCommnet
+export const deleteCommentRequest = (parmas: { _id: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/comment/deleteCommnet", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//添加留言 /api/comment/addCommnet
+// type AddCommentParams = {
+//   createDate?: string;
+//   name: string;
+//   link: string;
+//   avatar: string;
+//   description: string;
+// };
+// export const addCommentRequest = (parmas: AddLinkParams) => {
+//   return new Promise(async (resovle, reject) => {
+//     const res: AxiosData = await axios.post("/api/comment/addCommnet", parmas);
+//     resovle(res);
+//   }) as Promise<AxiosData>;
+// };
+
+//更新留言 /api/comment/updateComment
+// type UpdateCommentParams = {
+//   createDate?: string;
+//   name: string;
+//   link: string;
+//   avatar: string;
+//   description: string;
+//   _id: string;
+// };
+// export const updateCommentRequest = (parmas: UpdateLinkParams) => {
+//   return new Promise(async (resovle, reject) => {
+//     const res: AxiosData = await axios.post("/api/comment/updateComment", parmas);
+//     resovle(res);
+//   }) as Promise<AxiosData>;
+// };

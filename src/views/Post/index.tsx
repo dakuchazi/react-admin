@@ -21,10 +21,10 @@ import {
   selectPostData,
   selectPostLoading,
 } from "@/store/slices/postSlice";
+import { FileImageOutlined } from "@ant-design/icons";
+import { addPostRequest, deletePostRequest, updatePostRequest } from "@/utils/api";
 
 import s from "./index.module.scss";
-import { FileImageOutlined } from "@ant-design/icons";
-import { addPostRequest, updatePostRequest } from "@/utils/api";
 
 const Say: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -98,6 +98,24 @@ const Say: React.FC = () => {
     }
   );
 
+  const { loading: deleteLoading, run: deleteRun } = useRequest(
+    deletePostRequest,
+    {
+      manual: true,
+      onSuccess: (res) => {
+        if (res.code === "200") {
+          messageApi.success("太好了，删除成功");
+          setPageParams({
+            pagesize: 10,
+            current: 1,
+          });
+        } else {
+          messageApi.error("出错了，删除失败");
+        }
+      },
+    }
+  );
+
   useEffect(() => {
     dispatch(getPostListAsync(pageParams));
   }, [pageParams]);
@@ -112,10 +130,6 @@ const Say: React.FC = () => {
       });
     }
   }, [isModalOpen]);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
 
   const modalCancel = () => {
     setIsModalOpen(false);
@@ -150,7 +164,7 @@ const Say: React.FC = () => {
   };
 
   const handleDelete = (_id: string) => {
-    console.log(_id);
+    deleteRun({ _id });
   };
 
   const render = () => (
@@ -267,7 +281,7 @@ const Say: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <PageHeader text="发表说说" onClick={openModal} />
+      <PageHeader text="发表说说" onClick={() => setIsModalOpen(true)} />
       <MyTable
         loading={postLoading}
         columns={columns}

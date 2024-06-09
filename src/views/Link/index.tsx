@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 import CustomModal from "@/components/CustomModal";
 import MyTable from "@/components/MyTable";
 import PageHeader from "@/components/PageHeader";
-import { Button, Popconfirm, TableColumnsType, message } from "antd";
+import { Button, Input, Popconfirm, TableColumnsType, message } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store";
 import {
   getLinkListAsync,
   selectLinkData,
   selectLinkLoading,
 } from "@/store/slices/linkSlice";
-import { addLinkRequest, updateLinkRequest } from "@/utils/api";
+import { addLinkRequest, deleteLinkRequest, updateLinkRequest } from "@/utils/api";
+
+import s from './index.module.scss';
 
 const Link: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,8 +89,27 @@ const Link: React.FC = () => {
     }
   );
 
+  const { loading: deleteLoading, run: deleteRun } = useRequest(
+    deleteLinkRequest,
+    {
+      manual: true,
+      onSuccess: (res) => {
+        if (res.code === "200") {
+          messageApi.success("太好了，删除成功");
+          setPageParams({
+            pagesize: 10,
+            current: 1,
+          });
+        } else {
+          messageApi.error("出错了，删除失败");
+        }
+      },
+    }
+  );
+
   useEffect(() => {
     dispatch(getLinkListAsync(pageParams));
+
   }, [pageParams]);
 
   useEffect(() => {
@@ -103,10 +124,6 @@ const Link: React.FC = () => {
       });
     }
   }, [isModalOpen]);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
 
   const modalCancel = () => {
     setIsModalOpen(false);
@@ -134,7 +151,7 @@ const Link: React.FC = () => {
   };
 
   const handleDelete = (_id: string) => {
-    console.log(_id);
+    deleteRun({ _id });
   };
 
   const columns: TableColumnsType = [
@@ -157,14 +174,18 @@ const Link: React.FC = () => {
       title: "头像",
       align: "center",
       dataIndex: "avatar",
+      render: (avatar: string) => (
+        <img src={avatar} alt="img" style={{ width: '50px' }} />
+      ),
     },
     {
       title: "描述",
       align: "center",
-      dataIndex: "descr",
+      dataIndex: "description",
     },
     {
       title: "操作",
+      align: "center",
       render: (_, record) => (
         <>
           <Button
@@ -172,7 +193,7 @@ const Link: React.FC = () => {
             style={{ marginRight: 10 }}
             onClick={() => handleEdit(record)}
           >
-            更新.
+            更新
           </Button>
           <Popconfirm
             placement="bottomRight"
@@ -190,8 +211,51 @@ const Link: React.FC = () => {
     },
   ];
 
+
+  const dataFilter = [
+    {
+      text: '名称',
+      data: linkDetail.name,
+      setData: (value: any) => setLinkDetail({ name: value }),
+      require: true
+    },
+    {
+      text: '链接',
+      data: linkDetail.link,
+      setData: (value: any) => setLinkDetail({ link: value }),
+      require: true
+    },
+    {
+      text: '头像',
+      data: linkDetail.avatar,
+      setData: (value: any) => setLinkDetail({ avatar: value }),
+      require: true
+    },
+    {
+      text: '描述',
+      data: linkDetail.description,
+      setData: (value: any) => setLinkDetail({ description: value }),
+      require: true
+    }
+  ];
+
+
+  const render = () => (
+    dataFilter.map(({ text, data, setData }, index) => (
+      <Input
+        size='large'
+        key={index}
+        addonBefore={text}
+        value={data as string}
+        onChange={(e) => setData(e.target.value)}
+        className={s.modalInput}
+      />
+    ))
+  );
+
   return (
     <>
+      {contextHolder}
       <PageHeader text="添加友链" onClick={() => setIsModalOpen(true)} />
       <MyTable
         loading={linkLoading}
@@ -212,6 +276,11 @@ const Link: React.FC = () => {
         isModalOpen={isModalOpen}
         modalOk={handleModalOk}
         modalCancel={modalCancel}
+        confirmLoading={updateLinkLoading}
+        addText="发表"
+        updateText="修改"
+        render={render}
+        title="友链"
       />
     </>
   );

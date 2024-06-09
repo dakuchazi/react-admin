@@ -9,6 +9,7 @@ import tagReducer from "./slices/tagSlice";
 import articleReducer from "./slices/articleSlice";
 import postReducer from "./slices/postSlice";
 import linkReducer from "./slices/linkSlice";
+import commentReducer from "./slices/commentSlice";
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
@@ -29,6 +30,7 @@ export const store = configureStore({
     article: articleReducer,
     post: postReducer,
     link: linkReducer,
+    comment: commentReducer
   },
 });
 
