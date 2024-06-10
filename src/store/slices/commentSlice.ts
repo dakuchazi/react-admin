@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
-import { PostData, getCommentListRequest } from "@/utils/api";
+import { CommentData, getCommentListRequest } from "@/utils/api";
 
 const initialState: {
-  commentData: PostData;
+  commentData: CommentData;
   commentLoading: boolean;
 } = {
   commentData: {
@@ -13,7 +13,7 @@ const initialState: {
   commentLoading: true,
 };
 
-export const getCommentListAsync = createAsyncThunk<PostData, any>(
+export const getCommentListAsync = createAsyncThunk<CommentData, any>(
   "post/CommentData",
   async (params, api) => {
     const res = await getCommentListRequest(params);

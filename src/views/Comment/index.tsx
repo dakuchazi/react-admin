@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { deleteCommentRequest } from "@/utils/api";
 import { getCommentListAsync, selectCommentData, selectCommentLoading } from "@/store/slices/commentSlice";
 
+import s from './index.module.scss'
+
 const Comment: React.FC = () => {
   const dispatch = useAppDispatch();
   const [messageApi, contextHolder] = message.useMessage();
@@ -37,10 +39,7 @@ const Comment: React.FC = () => {
     }
   );
 
-  useEffect(() => {
-    dispatch(getCommentListAsync(pageParams));
 
-  }, [pageParams]);
 
   const handleDelete = (_id: string) => {
     deleteRun({ _id });
@@ -73,6 +72,20 @@ const Comment: React.FC = () => {
       dataIndex: "content",
     },
     {
+      title: "来源",
+      align: "center",
+      dataIndex: "from",
+      render: (value) => {
+        return <div className={s.typeBox}>
+          <div
+            className={value === 'article' ? s.comment : s.msg}
+          >
+            {value === 'article' ? '文章评论' : '留言板'}
+          </div>
+        </div>
+      }
+    },
+    {
       title: "操作",
       align: "center",
       render: (_, record) => (
@@ -100,13 +113,25 @@ const Comment: React.FC = () => {
     },
   ];
 
+  let commentList = commentData.list.map(item => {
+    if (item.children && item.children.length === 0) {
+      let { children, ...rest } = item;
+      return rest;
+    }
+    return item;
+  });
+
+  useEffect(() => {
+    dispatch(getCommentListAsync(pageParams));
+
+  }, [pageParams]);
   return (
     <>
       {contextHolder}
       <MyTable
         loading={commentLoading}
         columns={columns}
-        data={commentData.list}
+        data={commentList}
         total={commentData.total}
         pagesize={pageParams.pagesize}
         current={pageParams.current}

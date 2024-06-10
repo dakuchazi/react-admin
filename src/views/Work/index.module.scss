@@ -1,0 +1,22 @@
+.tableCoverBox {
+    margin: auto;
+    width: 100px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    overflow: hidden;
+
+    .tableCover {
+        height: 100%;
+    }
+}
+
+.modalInput {
+    margin-bottom: 10px;
+}
+
+.modalInput:last-child {
+    margin-bottom: 0;
+}

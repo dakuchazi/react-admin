@@ -358,7 +358,10 @@ export type CommentData = {
     _id: string;
     createDate: string;
     content: string;
-    imgs: string[];
+    email: string;
+    website: string;
+    name: string;
+    children: []
   }[]
   | [];
   total: number;
@@ -376,7 +379,7 @@ export const getCommentListRequest = (params: {
   }) as Promise<CommentData>;
 };
 
-//删除友链 /api/comment/deleteCommnet
+//删除留言 /api/comment/deleteCommnet
 export const deleteCommentRequest = (parmas: { _id: string }) => {
   return new Promise(async (resovle, reject) => {
     const res: AxiosData = await axios.post("/api/comment/deleteCommnet", parmas);
@@ -414,3 +417,128 @@ export const deleteCommentRequest = (parmas: { _id: string }) => {
 //     resovle(res);
 //   }) as Promise<AxiosData>;
 // };
+
+
+
+//添加作品 /api/work/addWork
+type AddWorkParams = {
+  createDate?: string;
+  name: string;
+  link: string;
+  cover: string;
+  description: string;
+};
+export const addWorkRequest = (parmas: AddWorkParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/work/addWork", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//删除作品  /api/work/deleteWork
+export const deleteWorkRequest = (parmas: { _id: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/work/deleteWork", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//更新作品  /api/work/updateWork
+type UpdateWorkParams = {
+  createDate?: string;
+  name: string;
+  link: string;
+  cover: string;
+  description: string;
+  _id: string;
+};
+export const updateWorkRequest = (parmas: UpdateWorkParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/work/updateWork", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//获取作品列表 /api/work/getWorkList
+export type WorkData = {
+  list:
+  | {
+    _id: string;
+    createDate: string;
+    name: string;
+    link: string;
+    cover: string;
+    description: string;
+  }[]
+  | [];
+  total: number;
+};
+export const getWorkListRequest = (params: {
+  pagesize: number;
+  current: number;
+}) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<WorkData> = await axios.post(
+      "/api/work/getWorkList",
+      params
+    );
+    resovle(res.data);
+  }) as Promise<WorkData>;
+};
+
+//添加日志 /api/log/addLog
+type AddLogParams = {
+  createDate: string;
+  content: string;
+};
+export const addLogRequest = (parmas: AddLogParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/log/addLog", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//删除日志 /api/log/deleteLog
+export const deleteLogRequest = (parmas: { _id: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/log/deleteLog", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//更新日志 /api/log/updateLog
+type UpdateLogParams = {
+  createDate?: string;
+  content: string;
+  _id: string;
+};
+export const updateLogRequest = (parmas: UpdateLogParams) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/log/updateLog", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};
+
+//获取日志列表 /api/log/getLogList
+export type LogData = {
+  list:
+  | {
+    _id: string;
+    createDate: string;
+    content: string;
+  }[]
+  | [];
+  total: number;
+};
+export const getLogListRequest = (params: {
+  pagesize: number;
+  current: number;
+}) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<LogData> = await axios.post(
+      "/api/log/getLogList",
+      params
+    );
+    resovle(res.data);
+  }) as Promise<LogData>;
+};

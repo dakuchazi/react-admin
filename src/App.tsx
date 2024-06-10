@@ -9,6 +9,8 @@ import Draft from "./views/Draft";
 import Post from "./views/Post";
 import Link from "./views/Link";
 import Comment from "./views/Comment";
+import Work from "./views/Work";
+import Log from "./views/Log";
 
 import "./global.custom.scss";
 
@@ -26,6 +28,8 @@ function App() {
           <Route path="/post" element={<Post />}></Route>
           <Route path="/link" element={<Link />}></Route>
           <Route path="/comment" element={<Comment />}></Route>
+          <Route path="/work" element={<Work />}></Route>
+          <Route path="/log" element={<Log />}></Route>
         </Route>
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
