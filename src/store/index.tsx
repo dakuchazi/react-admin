@@ -12,6 +12,7 @@ import linkReducer from "./slices/linkSlice";
 import commentReducer from "./slices/commentSlice";
 import workReducer from "./slices/workSlice";
 import logReducer from "./slices/logSlice";
+import aboutReducer from "./slices/aboutSlice";
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
@@ -34,7 +35,8 @@ export const store = configureStore({
     link: linkReducer,
     comment: commentReducer,
     work: workReducer,
-    log: logReducer
+    log: logReducer,
+    about: aboutReducer
   },
 });
 

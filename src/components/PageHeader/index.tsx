@@ -12,7 +12,7 @@ interface Props {
 const PageHeader: React.FC<Props> = ({ text, onClick, render }) => {
   return (
     <div className={s.pageHeaderBox}>
-      <Button type="primary" size="large" onClick={() => onClick()}>
+      <Button type="primary" onClick={() => onClick()}>
         {text}
       </Button>
       {render && <>{render()}</>}

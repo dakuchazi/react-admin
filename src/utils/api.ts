@@ -542,3 +542,23 @@ export const getLogListRequest = (params: {
     resovle(res.data);
   }) as Promise<LogData>;
 };
+
+//获取公告列表 /api/about/getAboutList
+export const getAboutListRequest = () => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.get("/api/about/getAboutList");
+    resovle(res.data);
+  }) as Promise<AxiosData>;
+};
+
+//更新公告 /api/about/updateAbout
+export const updateAboutRequest = (parmas: {
+  myself: string;
+  website: string;
+  _id: string;
+}) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData = await axios.post("/api/about/updateAbout", parmas);
+    resovle(res);
+  }) as Promise<AxiosData>;
+};

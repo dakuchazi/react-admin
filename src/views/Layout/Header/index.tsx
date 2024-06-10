@@ -18,7 +18,7 @@ export default function HeaderCp() {
 
   return (
     <>
-      <Header style={{ padding: 0, background: colorBgContainer }}>
+      <Header className="header" style={{ background: colorBgContainer }}>
         <Button
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -27,8 +27,8 @@ export default function HeaderCp() {
           }}
           style={{
             fontSize: "16px",
-            width: 64,
-            height: 64,
+            width: 45,
+            height: 45,
           }}
         />
         <div className="header-breadCrumb--wrap">

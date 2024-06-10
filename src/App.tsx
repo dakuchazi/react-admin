@@ -11,6 +11,7 @@ import Link from "./views/Link";
 import Comment from "./views/Comment";
 import Work from "./views/Work";
 import Log from "./views/Log";
+import About from "./views/About";
 
 import "./global.custom.scss";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/comment" element={<Comment />}></Route>
           <Route path="/work" element={<Work />}></Route>
           <Route path="/log" element={<Log />}></Route>
+          <Route path="/about" element={<About />}></Route>
         </Route>
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>

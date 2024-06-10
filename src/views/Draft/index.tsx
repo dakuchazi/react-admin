@@ -12,8 +12,6 @@ import {
 import { deleteArticleRequest } from "@/utils/api";
 import TableTag from "@/components/TableTag";
 
-import "./index.custom.scss";
-
 const Draft: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

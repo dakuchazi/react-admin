@@ -24,8 +24,8 @@ const LayoutCp: React.FC = () => {
         </div>
         <Content
           style={{
-            margin: "16px",
-            padding: 24,
+            marginTop: '16px',
+            padding: '16px',
             height: "calc(100% - 100px)",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,

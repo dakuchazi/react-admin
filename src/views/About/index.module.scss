@@ -1,0 +1,15 @@
+.aboutBox {
+  height: 100%;
+  display: flex;
+
+  .left {
+    margin-right: 10px;
+  }
+
+  .left,
+  .right {
+    width: 50%;
+    height: 100%;
+    box-shadow: 0 0px 5px 5px rgba(0, 21, 41, 0.08);
+  }
+}

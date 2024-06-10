@@ -1,12 +1,8 @@
-import "./index.custom.scss";
-
 import { useRequest, useSetState } from "ahooks";
 import React, { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import MyTable from "@/components/MyTable";
 import PageHeader from "@/components/PageHeader";
-import s from "./index.module.scss";
 import {
   Button,
   Input,
@@ -26,6 +22,8 @@ import {
 } from "@/store/slices/articleSlice";
 import { deleteArticleRequest } from "@/utils/api";
 import TableTag from "@/components/TableTag";
+
+import s from "./index.module.scss";
 
 const Article: React.FC = () => {
   const navigate = useNavigate();
@@ -161,7 +159,7 @@ const Article: React.FC = () => {
     <div className={s.searchBox}>
       <div className={s.search}>
         <Input
-          size="large"
+
           allowClear
           style={{ flex: 1, marginRight: 10 }}
           className="articleInputBox"
@@ -171,7 +169,7 @@ const Article: React.FC = () => {
           onPressEnter={search}
         />
         <Select
-          size="large"
+
           placeholder="请选择文章分类"
           style={{ flex: 1, marginRight: 10 }}
           showSearch
@@ -188,7 +186,7 @@ const Article: React.FC = () => {
         />
 
         <Select
-          size="large"
+
           placeholder="请选择文章标签"
           style={{ flex: 2, marginRight: 10 }}
           maxTagCount={4}
@@ -209,7 +207,7 @@ const Article: React.FC = () => {
       <div>
         <Button
           type="primary"
-          size="large"
+
           onClick={search}
           style={{ fontSize: 16, marginRight: 10 }}
         >
@@ -217,7 +215,7 @@ const Article: React.FC = () => {
         </Button>
         <Button
           type="primary"
-          size="large"
+
           onClick={() => {
             setSearchParams({
               title: "",
