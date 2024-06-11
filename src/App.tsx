@@ -12,6 +12,7 @@ import Comment from "./views/Comment";
 import Work from "./views/Work";
 import Log from "./views/Log";
 import About from "./views/About";
+import EditAbout from "./views/About/EditAbout";
 
 import "./global.custom.scss";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/work" element={<Work />}></Route>
           <Route path="/log" element={<Log />}></Route>
           <Route path="/about" element={<About />}></Route>
+          <Route path="/editAbout" element={<EditAbout />}></Route>
         </Route>
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>

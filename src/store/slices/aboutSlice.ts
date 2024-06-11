@@ -27,10 +27,9 @@ const aboutSlice = createSlice({
     initialState,
     reducers: {
         // 同步修改state
-        // setAboutDate(state, action) {
-        //   //   state.aboutDate = payload;
-        //   console.log("===payload===", action.payload);
-        // },
+        setAboutDate(state, action) {
+            state.aboutDate = action.payload;
+        },
     },
 
     extraReducers: (builder) => {
@@ -52,5 +51,7 @@ export const selectAboutData = (state: RootState) => {
 export const selectAboutLoading = (state: RootState) => {
     return state.about.aboutLoading;
 };
+
+export const { setAboutDate } = aboutSlice.actions
 
 export default aboutSlice.reducer;

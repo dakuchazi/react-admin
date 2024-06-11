@@ -1,0 +1,39 @@
+@import '../../../styles/base.scss';
+@import '../../../styles/style.scss';
+
+.aboutTitle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.aboutUpdate {
+  position: absolute;
+  right: 10px;
+}
+
+.markedEditBox {
+  display: flex;
+  height: calc(100% - (56px + 10px));
+
+  .markedEdit {
+    box-shadow: 0 0px 5px 5px rgba(0, 21, 41, 0.08);
+    height: 100%;
+    width: 50%;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: #fff;
+    overflow-y: auto;
+  }
+
+  .input {
+    box-shadow: 0 0px 5px 5px rgba(0, 21, 41, 0.08);
+    margin-right: 10px;
+    padding: 30px;
+    font-size: 18px;
+    @extend .scroll;
+  }
+}

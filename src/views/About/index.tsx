@@ -21,7 +21,7 @@ const About: React.FC = () => {
         <AboutBase content={aboutData.myself} site='关于我' params={1} />
       </div>
       <div className={s.right}>
-        <AboutBase content={aboutData.website} site='关于本站' params={0} />
+        <AboutBase content={aboutData.website} site='关于本站' params={2} />
       </div>
     </div>
   );
