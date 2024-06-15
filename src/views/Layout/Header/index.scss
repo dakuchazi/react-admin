@@ -6,4 +6,22 @@
     .header-breadCrumb--wrap {
         display: inline-block;
     }
+    .header-right--wrap {
+      padding-right: 16px;
+        float: right;
+        .dropdown-wrap {
+          cursor: pointer;
+          display: inline-block;
+          .ant-dropdown-menu-item {
+            padding: 6px 20px 8px 15px;
+            i {
+              padding-right: 15px;
+            }
+          }
+          .anticon-caret-down {
+            vertical-align: bottom;
+            padding: 0 0 6px 6px;
+          }
+        }
+      }
 }

@@ -35,7 +35,7 @@ function App() {
           <Route path="/about" element={<About />}></Route>
           <Route path="/about/add" element={<EditAbout />}></Route>
         </Route>
-        {/* <Route path="*" element={<Navigate to="/home" />} /> */}
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </div>
   );

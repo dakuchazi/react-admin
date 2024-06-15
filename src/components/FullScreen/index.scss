@@ -1,0 +1,26 @@
+.fullScreen-container {
+  display: inline-block;
+  font-size: 25px;
+  margin-right: 15px;
+  height: 100%;
+  cursor: pointer;
+  vertical-align: middle;
+  .header-right-menu--wrap {
+    float: right;
+    .dropdown-wrap {
+      cursor: pointer;
+      display: inline-block;
+      .ant-dropdown-menu-item {
+        padding: 6px 20px 8px 15px;
+        i {
+          padding-right: 15px;
+        }
+      }
+      .anticon-caret-down {
+        vertical-align: bottom;
+        padding: 0 0 12px 6px;
+      }
+    }
+  }
+}
+
