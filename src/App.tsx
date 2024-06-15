@@ -25,7 +25,7 @@ function App() {
         <Route element={<LayoutCp />}>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/article" element={<Article />}></Route>
-          <Route path="/addArticle" element={<AddArticle />}></Route>
+          <Route path="/article/add" element={<AddArticle />}></Route>
           <Route path="/draft" element={<Draft />}></Route>
           <Route path="/post" element={<Post />}></Route>
           <Route path="/link" element={<Link />}></Route>
@@ -33,9 +33,9 @@ function App() {
           <Route path="/work" element={<Work />}></Route>
           <Route path="/log" element={<Log />}></Route>
           <Route path="/about" element={<About />}></Route>
-          <Route path="/editAbout" element={<EditAbout />}></Route>
+          <Route path="/about/add" element={<EditAbout />}></Route>
         </Route>
-        <Route path="*" element={<Navigate to="/home" />} />
+        {/* <Route path="*" element={<Navigate to="/home" />} /> */}
       </Routes>
     </div>
   );

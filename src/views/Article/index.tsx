@@ -75,7 +75,7 @@ const Article: React.FC = () => {
   }, [pageParams]);
 
   const handleEdit = (id: string) => {
-    navigate(`/addArticle?_id=${id}`);
+    navigate(`/article/add?_id=${id}`);
   };
 
   const handleDelete = (id: string) => {
@@ -159,7 +159,6 @@ const Article: React.FC = () => {
     <div className={s.searchBox}>
       <div className={s.search}>
         <Input
-
           allowClear
           style={{ flex: 1, marginRight: 10 }}
           className="articleInputBox"
@@ -169,7 +168,6 @@ const Article: React.FC = () => {
           onPressEnter={search}
         />
         <Select
-
           placeholder="请选择文章分类"
           style={{ flex: 1, marginRight: 10 }}
           showSearch
@@ -186,7 +184,6 @@ const Article: React.FC = () => {
         />
 
         <Select
-
           placeholder="请选择文章标签"
           style={{ flex: 2, marginRight: 10 }}
           maxTagCount={4}
@@ -207,7 +204,6 @@ const Article: React.FC = () => {
       <div>
         <Button
           type="primary"
-
           onClick={search}
           style={{ fontSize: 16, marginRight: 10 }}
         >
@@ -215,7 +211,6 @@ const Article: React.FC = () => {
         </Button>
         <Button
           type="primary"
-
           onClick={() => {
             setSearchParams({
               title: "",
@@ -235,7 +230,7 @@ const Article: React.FC = () => {
       {contextHolder}
       <PageHeader
         text="写文章"
-        onClick={() => navigate(`/addArticle`)}
+        onClick={() => navigate(`/article/add`)}
         render={render}
       />
       {

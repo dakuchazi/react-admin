@@ -50,7 +50,7 @@ const Draft: React.FC = () => {
   }, [pageParams]);
 
   const handleEdit = (id: string) => {
-    navigate(`/addArticle?_id=${id}`);
+    navigate(`/article/add?_id=${id}`);
   };
 
   const handleDelete = (id: string) => {

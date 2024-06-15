@@ -19,13 +19,13 @@ const LayoutCp: React.FC = () => {
       <SiderCp />
       <Layout className="layout__right">
         <HeaderCp />
-        <div className="layout__tagsView--wrap">
+        {/* <div className="layout__tagsView--wrap">
           <TagsView />
-        </div>
+        </div> */}
         <Content
           style={{
-            marginTop: '16px',
-            padding: '16px',
+            marginTop: "16px",
+            padding: "16px",
             height: "calc(100% - 100px)",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
