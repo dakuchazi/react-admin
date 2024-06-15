@@ -1,10 +1,9 @@
 import { useRequest, useResetState } from "ahooks";
 import classNames from "classnames";
 import React, { useState } from "react";
-import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../CustomModal";
-import s from "./index.module.scss";
+
 import { Input, Button, Popconfirm, message } from "antd";
 import {
   DeleteOutlined,
@@ -22,6 +21,8 @@ import {
   selectTypeLoading,
   selectTypeData,
 } from "@/store/slices/typeSlice";
+
+import s from "./index.module.scss";
 
 const { Search } = Input;
 
@@ -212,4 +213,4 @@ const ClassCard: React.FC = () => {
   );
 };
 
-export default ClassCard;
+export default React.memo(ClassCard);

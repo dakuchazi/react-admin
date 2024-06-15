@@ -32,6 +32,9 @@ const typeSlice = createSlice({
   //pengding rejected 可以用来处理等待和失败
   extraReducers: (builder) => {
     builder
+      .addCase(getTypeListAsync.pending, (state) => {
+        state.typeLoading = true;
+      })
       .addCase(getTypeListAsync.rejected, (state) => {
         state.typeLoading = false;
       })

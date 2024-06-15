@@ -9,13 +9,13 @@ import * as echarts from "echarts/core";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
 import ReactEChartsCore from "echarts-for-react/lib/core";
-import React, { LegacyRef, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useChartData } from "./config";
-import s from "./index.module.scss";
 import { LoadingOutlined } from "@ant-design/icons";
 import EChartsReactCore from "echarts-for-react/lib/core";
+
+import s from "./index.module.scss";
 
 echarts.use([
   TitleComponent,
@@ -71,4 +71,4 @@ const ChartCard: React.FC = () => {
   );
 };
 
-export default ChartCard;
+export default React.memo(ChartCard);

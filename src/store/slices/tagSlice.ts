@@ -32,6 +32,9 @@ const tagSlice = createSlice({
   //pengding rejected 可以用来处理等待和失败
   extraReducers: (builder) => {
     builder
+      .addCase(getTagListAsync.pending, (state) => {
+        state.tagLoading = true;
+      })
       .addCase(getTagListAsync.rejected, (state) => {
         state.tagLoading = false;
       })

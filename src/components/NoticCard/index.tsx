@@ -1,12 +1,11 @@
-import { Input, Button, Popconfirm, message } from "antd";
+import { Input, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useMount, useRequest, useResetState } from "ahooks";
+import { useRequest, useResetState } from "ahooks";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
+
 import CustomModal from "../CustomModal";
 import Emoji from "../Emoji";
-import s from "./index.module.scss";
 import { updateNoticeRequest } from "@/utils/api";
 import { useAppDispatch, useAppSelector } from "@/store";
 import {
@@ -15,13 +14,14 @@ import {
   selectNoticeLoading,
 } from "@/store/slices/noticeSlice";
 
+import s from "./index.module.scss";
+
 const { TextArea } = Input;
 
 const NoticeCard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [localNotice, setLocalNotice, resetLocalNotice] = useResetState("");
   const [messageApi, contextHolder] = message.useMessage();
-
   const noticeDate = useAppSelector(selectNoticeData);
   const noticeLoading = useAppSelector(selectNoticeLoading);
   const dispatch = useAppDispatch();
@@ -34,6 +34,7 @@ const NoticeCard: React.FC = () => {
       onSuccess(res) {
         if (res.code === "200") {
           messageApi.success("太好了，修改成功");
+          modalCancel();
           dispatch(getNoticeListAsync());
         } else {
           messageApi.error("出错了，修改失败");
@@ -46,12 +47,6 @@ const NoticeCard: React.FC = () => {
   useEffect(() => {
     dispatch(getNoticeListAsync());
   }, []);
-
-  // useMount(() => {
-  //   if (!reduxNotice.isDone) {
-  //     run();
-  //   }
-  // });
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -121,4 +116,4 @@ const NoticeCard: React.FC = () => {
   );
 };
 
-export default NoticeCard;
+export default React.memo(NoticeCard);

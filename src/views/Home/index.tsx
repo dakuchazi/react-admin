@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ChartCard from "@/components/ChartCard";
 import ClassCard from "@/components/ClassCrad";
 import NoticeCard from "@/components/NoticCard";
 import CountCard from "@/components/CountCard";
 import TagCard from "@/components/TagCard";
+import { useAppDispatch, useAppSelector } from "@/store";
 
 import s from "./index.module.scss";
-import { useAppDispatch, useAppSelector } from "@/store";
 import {
   getCountDataAsync,
   selectCountData,
   selectCountLoading,
 } from "@/store/slices/homeSlice";
 
-export default function Home() {
+const Home = () => {
   const dispatch = useAppDispatch();
   const countData = useAppSelector(selectCountData);
   const countLoading = useAppSelector(selectCountLoading);
@@ -45,4 +45,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default Home;

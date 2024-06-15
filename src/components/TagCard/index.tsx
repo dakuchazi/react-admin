@@ -2,10 +2,8 @@ import CustomModal from "../CustomModal";
 import { useRequest, useResetState } from "ahooks";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { useColor } from "./config";
-import s from "./index.module.scss";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -19,6 +17,8 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addTagRequest, deleteTagRequest, updateTagRequest } from "@/utils/api";
 import { Input, Popconfirm, message } from "antd";
+
+import s from "./index.module.scss";
 
 const { Search } = Input;
 
@@ -201,4 +201,4 @@ const TagCard: React.FC = () => {
   );
 };
 
-export default TagCard;
+export default React.memo(TagCard);

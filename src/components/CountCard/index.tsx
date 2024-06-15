@@ -1,6 +1,9 @@
+import React from "react";
 import classNames from "classnames";
-import s from "./index.module.scss";
 import { LoadingOutlined } from "@ant-design/icons";
+import useRenderCheck from "@/hooks/useRenderCheck";
+
+import s from "./index.module.scss";
 
 interface Props {
   data: {
@@ -10,8 +13,10 @@ interface Props {
   isLoading: boolean;
 }
 
-export default function CountCard(props: Props) {
+const CountCard = (props: Props) => {
   const { data, isLoading } = props;
+
+  useRenderCheck("===CountCard组件===");
 
   return (
     <div className={classNames(s.countCardBox)}>
@@ -21,4 +26,6 @@ export default function CountCard(props: Props) {
       </div>
     </div>
   );
-}
+};
+
+export default React.memo(CountCard);
