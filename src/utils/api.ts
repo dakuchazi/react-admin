@@ -7,6 +7,22 @@ type AxiosData<T = any> = {
   data: T;
 };
 
+//登录接口 /api/login
+export const loginRequest = (params: { account: string; password: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<any> = await axios.post("/api/login");
+    resovle(res.data);
+  }) as Promise<any>;
+};
+
+//登出接口 /api/logout
+export const logoutRequest = () => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<any> = await axios.get("/api/logout");
+    resovle(res.data);
+  }) as Promise<any>;
+};
+
 //响应拦截器返回来的res的type
 type AxiosRes<T = AxiosData> = {
   config: Object;
@@ -128,14 +144,14 @@ export const updateTagRequest = (parmas: { name: string; _id: string }) => {
 //获取文章列表 /api/article/getArticleList
 export type ArticleData = {
   list:
-  | {
-    _id: string;
-    createDate: string;
-    title: string;
-    type: string;
-    tags: string;
-  }[]
-  | [];
+    | {
+        _id: string;
+        createDate: string;
+        title: string;
+        type: string;
+        tags: string;
+      }[]
+    | [];
   total: number;
 };
 export const getArticleListRequest = (params: {
@@ -265,13 +281,13 @@ export const updatePostRequest = (parmas: UpdatePostParams) => {
 //获取说说列表 /api/post/getPostList
 export type PostData = {
   list:
-  | {
-    _id: string;
-    createDate: string;
-    content: string;
-    imgs: string[];
-  }[]
-  | [];
+    | {
+        _id: string;
+        createDate: string;
+        content: string;
+        imgs: string[];
+      }[]
+    | [];
   total: number;
 };
 export const getPostListRequest = (params: {
@@ -329,13 +345,13 @@ export const updateLinkRequest = (parmas: UpdateLinkParams) => {
 //获取友链列表 /api/link/getLinkList
 export type LinkData = {
   list:
-  | {
-    _id: string;
-    createDate: string;
-    content: string;
-    imgs: string[];
-  }[]
-  | [];
+    | {
+        _id: string;
+        createDate: string;
+        content: string;
+        imgs: string[];
+      }[]
+    | [];
   total: number;
 };
 export const getLinkListRequest = (params: {
@@ -354,16 +370,16 @@ export const getLinkListRequest = (params: {
 //获取留言列表 /api/comment/getCommentList
 export type CommentData = {
   list:
-  | {
-    _id: string;
-    createDate: string;
-    content: string;
-    email: string;
-    website: string;
-    name: string;
-    children: []
-  }[]
-  | [];
+    | {
+        _id: string;
+        createDate: string;
+        content: string;
+        email: string;
+        website: string;
+        name: string;
+        children: [];
+      }[]
+    | [];
   total: number;
 };
 export const getCommentListRequest = (params: {
@@ -382,7 +398,10 @@ export const getCommentListRequest = (params: {
 //删除留言 /api/comment/deleteCommnet
 export const deleteCommentRequest = (parmas: { _id: string }) => {
   return new Promise(async (resovle, reject) => {
-    const res: AxiosData = await axios.post("/api/comment/deleteCommnet", parmas);
+    const res: AxiosData = await axios.post(
+      "/api/comment/deleteCommnet",
+      parmas
+    );
     resovle(res);
   }) as Promise<AxiosData>;
 };
@@ -417,8 +436,6 @@ export const deleteCommentRequest = (parmas: { _id: string }) => {
 //     resovle(res);
 //   }) as Promise<AxiosData>;
 // };
-
-
 
 //添加作品 /api/work/addWork
 type AddWorkParams = {
@@ -462,15 +479,15 @@ export const updateWorkRequest = (parmas: UpdateWorkParams) => {
 //获取作品列表 /api/work/getWorkList
 export type WorkData = {
   list:
-  | {
-    _id: string;
-    createDate: string;
-    name: string;
-    link: string;
-    cover: string;
-    description: string;
-  }[]
-  | [];
+    | {
+        _id: string;
+        createDate: string;
+        name: string;
+        link: string;
+        cover: string;
+        description: string;
+      }[]
+    | [];
   total: number;
 };
 export const getWorkListRequest = (params: {
@@ -522,12 +539,12 @@ export const updateLogRequest = (parmas: UpdateLogParams) => {
 //获取日志列表 /api/log/getLogList
 export type LogData = {
   list:
-  | {
-    _id: string;
-    createDate: string;
-    content: string;
-  }[]
-  | [];
+    | {
+        _id: string;
+        createDate: string;
+        content: string;
+      }[]
+    | [];
   total: number;
 };
 export const getLogListRequest = (params: {

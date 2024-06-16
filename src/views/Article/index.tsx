@@ -1,5 +1,5 @@
 import { useRequest, useSetState } from "ahooks";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MyTable from "@/components/MyTable";
 import PageHeader from "@/components/PageHeader";
