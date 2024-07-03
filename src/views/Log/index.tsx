@@ -65,33 +65,26 @@ const Log: React.FC = () => {
               await dispatch(getLogListAsync({ current: 1, pagesize: 10 }));
               setIsModalOpen(false);
             });
-        } else {
-          messageApi.error("操作出错了");
         }
       },
     }
   );
-  const { loading: addLogLoading, run: addLogRun } = useRequest(
-    addLogRequest,
-    {
-      manual: true,
-      onSuccess: (res) => {
-        if (res.code === "200") {
-          messageApi
-            .success({
-              content: "操作成功",
-              duration: 1,
-            })
-            .then(async () => {
-              await dispatch(getLogListAsync({ current: 1, pagesize: 10 }));
-              setIsModalOpen(false);
-            });
-        } else {
-          messageApi.error("操作出错了");
-        }
-      },
-    }
-  );
+  const { loading: addLogLoading, run: addLogRun } = useRequest(addLogRequest, {
+    manual: true,
+    onSuccess: (res) => {
+      if (res.code === "200") {
+        messageApi
+          .success({
+            content: "操作成功",
+            duration: 1,
+          })
+          .then(async () => {
+            await dispatch(getLogListAsync({ current: 1, pagesize: 10 }));
+            setIsModalOpen(false);
+          });
+      }
+    },
+  });
   const { loading: deleteLoading, run: deleteRun } = useRequest(
     deleteLogRequest,
     {
@@ -103,8 +96,6 @@ const Log: React.FC = () => {
             pagesize: 10,
             current: 1,
           });
-        } else {
-          messageApi.error("出错了，删除失败");
         }
       },
     }
@@ -136,7 +127,7 @@ const Log: React.FC = () => {
   }) => {
     setIsModalOpen(true);
     setIsEdit(true);
-    console.log('===record====', record);
+    console.log("===record====", record);
 
     setLogDetail(record);
   };

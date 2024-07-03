@@ -19,9 +19,14 @@ import Sider from "antd/es/layout/Sider";
 import { useAppSelector } from "@/store";
 import { selectCollapsed } from "@/store/slices/layoutSlice";
 import { useNavigate } from "react-router-dom";
-import { selectUserRoutes } from "@/store/slices/userSlice";
+import {
+  selectAvatarLoading,
+  selectUserInfo,
+  selectUserRoutes,
+} from "@/store/slices/userSlice";
 import { useMount } from "ahooks";
 import useCurrentPathName from "@/hooks/useCurrentPathName";
+import { LoadingOutlined } from "@ant-design/icons";
 
 type MenuItem = Required<MenuProps>["items"][number];
 function getItem(
@@ -45,6 +50,8 @@ const SiderCp: React.FC = () => {
   const navigate = useNavigate();
   const collapsed = useAppSelector(selectCollapsed);
   const userRoutes = useAppSelector(selectUserRoutes);
+  const userInfo = useAppSelector(selectUserInfo);
+  const avatarLoading = useAppSelector(selectAvatarLoading);
   const currentPathName = useCurrentPathName();
   const [menuItem, setMenuItem] = useState<MenuItem[]>([]);
 
@@ -63,7 +70,12 @@ const SiderCp: React.FC = () => {
   };
   return (
     <Sider trigger={null} collapsed={collapsed}>
-      <AvatarCp></AvatarCp>
+      <AvatarCp
+        avatar={userInfo.avatar}
+        name={userInfo.name}
+        loading={avatarLoading}
+      ></AvatarCp>
+
       <Menu
         mode="inline"
         theme="dark"

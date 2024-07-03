@@ -38,8 +38,6 @@ const Draft: React.FC = () => {
             pagesize: 10,
             current: 1,
           });
-        } else {
-          messageApi.error("出错了，删除失败");
         }
       },
     }

@@ -42,8 +42,6 @@ const TagCard: React.FC = () => {
         if (res.code === "200") {
           messageApi.success("太好了，删除成功");
           dispatch(getTagListAsync());
-        } else {
-          messageApi.error("出错了，删除失败");
         }
       },
     }
@@ -58,8 +56,6 @@ const TagCard: React.FC = () => {
           messageApi.success("太好了，修改成功");
           modalCancel();
           dispatch(getTagListAsync());
-        } else {
-          messageApi.error("出错了，修改失败");
         }
       },
     }

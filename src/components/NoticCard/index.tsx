@@ -36,9 +36,6 @@ const NoticeCard: React.FC = () => {
           messageApi.success("太好了，修改成功");
           modalCancel();
           dispatch(getNoticeListAsync());
-        } else {
-          messageApi.error("出错了，修改失败");
-          dispatch(getNoticeListAsync());
         }
       },
     }
@@ -100,7 +97,7 @@ const NoticeCard: React.FC = () => {
           })}
           onClick={openModal}
         >
-          {noticeLoading ? <LoadingOutlined /> : noticeDate.content}
+          {noticeLoading ? <LoadingOutlined /> : noticeDate?.content}
         </div>
       </div>
       <CustomModal

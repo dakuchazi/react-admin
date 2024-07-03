@@ -9,12 +9,13 @@ import { Avatar, Button, Dropdown, MenuProps, theme } from "antd";
 import { Header } from "antd/es/layout/layout";
 import BreadCrumbCp from "./BreadCrumbCp";
 import FullScreen from "@/components/FullScreen";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { selectUserInfo } from "@/store/slices/userSlice";
 
 import "./index.scss";
 
 export default function HeaderCp() {
+  const navigate = useNavigate();
   const userInfo = useAppSelector(selectUserInfo);
   const dispath = useAppDispatch();
   const collapsed = useAppSelector(selectCollapsed);
@@ -42,7 +43,8 @@ export default function HeaderCp() {
       danger: true,
       label: "注销",
       onClick: () => {
-        console.log("===注销===");
+        localStorage.removeItem("token");
+        navigate("/login");
       },
     },
   ];

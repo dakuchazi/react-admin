@@ -13,7 +13,9 @@ export const useChartData = () => {
   const typeCardLoading = useAppSelector(selectTypeLoading);
 
   const format = (chartData: any) => {
+    if (!Array.isArray(chartData)) return;
     if (chartData.length === 0) return;
+
     const tmeArr = chartData.map((item: any) => {
       return { name: item.name, value: item.count };
     });

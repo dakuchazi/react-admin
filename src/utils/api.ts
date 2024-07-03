@@ -7,10 +7,21 @@ type AxiosData<T = any> = {
   data: T;
 };
 
-//登录接口 /api/login
-export const loginRequest = (params: { account: string; password: string }) => {
+//登录接口 /api/auth/login
+export const loginRequest = (params: {
+  username: string;
+  password: string;
+}) => {
   return new Promise(async (resovle, reject) => {
-    const res: AxiosData<any> = await axios.post("/api/login");
+    const res: AxiosData<any> = await axios.post("/api/auth/login", params);
+    resovle(res.data);
+  }) as Promise<any>;
+};
+
+//获取用户详细信息 /api/user/findUser
+export const findUserRequest = (params: { username: string }) => {
+  return new Promise(async (resovle, reject) => {
+    const res: AxiosData<any> = await axios.post("/api/user/findUser", params);
     resovle(res.data);
   }) as Promise<any>;
 };
@@ -43,7 +54,7 @@ export const getCountDataRequest = () => {
     const res: AxiosData<CountData[]> = await axios.get(
       "/api/home/getCountData"
     );
-    resovle(res.data);
+    resovle(res?.data || []);
   }) as Promise<CountData[]>;
 };
 
@@ -57,7 +68,7 @@ export type TypeData = {
 export const getTypeListRequest = () => {
   return new Promise(async (resovle, reject) => {
     const res: AxiosData<TypeData[]> = await axios.get("/api/type/getTypeList");
-    resovle(res.data);
+    resovle(res?.data || []);
   }) as Promise<TypeData[]>;
 };
 
@@ -89,7 +100,7 @@ export const updateTypeRequest = (parmas: { name: string; _id: string }) => {
 export const getNoticeListRequest = () => {
   return new Promise(async (resovle, reject) => {
     const res: AxiosData = await axios.get("/api/notice/getNoticeList");
-    resovle(res.data);
+    resovle(res?.data || {});
   }) as Promise<AxiosData>;
 };
 
@@ -113,7 +124,7 @@ export type TagData = {
 export const getTagListRequest = () => {
   return new Promise(async (resovle, reject) => {
     const res: AxiosData<TypeData[]> = await axios.get("/api/tag/getTagList");
-    resovle(res.data);
+    resovle(res?.data || []);
   }) as Promise<TagData[]>;
 };
 

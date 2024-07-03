@@ -3,28 +3,36 @@ import { useNavigate } from "react-router-dom";
 import { Button, Input, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import avatarUrl from "@/assets/images/avatar1.png";
-import { loginRequest } from "@/utils/api";
+import axios from "@/utils/axios";
 
 import s from "./index.module.scss";
+import { useAppDispatch } from "@/store";
+import { getUserInfoAsync } from "@/store/slices/userSlice";
 
 const Login: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
-
-  const [account, setAccount] = useState("");
+  const dispatch = useAppDispatch();
+  const [username, setAccount] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = async (account: string, password: string) => {
-    if (!account || !password) {
+  const handleLogin = async (username: string, password: string) => {
+    if (!username || !password) {
       messageApi.warning("登录失败！请输入账号、密码！");
       return;
     }
-    const res = await loginRequest({ account, password });
-    res && navigate("admin");
-    res
-      ? messageApi.success("登录成功！欢迎进入个人博客后台管理系统！")
-      : messageApi.warning("登录失败！用户名或密码不正确，请重新登录！");
+    const res: any = await axios.post("/api/auth/login", {
+      username,
+      password,
+    });
+
+    if (res.code === "200") {
+      localStorage.setItem("token", res.data.access_token);
+      localStorage.setItem("username", username);
+
+      navigate("/");
+    }
   };
 
   return (
@@ -41,7 +49,7 @@ const Login: React.FC = () => {
               style={{ marginBottom: 20 }}
               size="large"
               prefix={<UserOutlined />}
-              value={account}
+              value={username}
               onChange={(e) => {
                 setAccount(e.target.value);
               }}
@@ -67,7 +75,7 @@ const Login: React.FC = () => {
               <Button
                 type="primary"
                 size="large"
-                onClick={() => handleLogin(password, password)}
+                onClick={() => handleLogin(username, password)}
               >
                 登录
               </Button>

@@ -1,3 +1,6 @@
+@import '../../../../styles/base.scss';
+@import '../../../../styles/style.scss';
+
 .sidebar-avatar-container {
     position: relative;
     width: 100%;
@@ -22,5 +25,13 @@
         font-size: 14px;
         font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
         vertical-align: middle;
+    }
+
+    & .avatar_loading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        color: $themeColor3;
     }
 }

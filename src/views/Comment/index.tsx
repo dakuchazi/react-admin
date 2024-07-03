@@ -4,9 +4,13 @@ import MyTable from "@/components/MyTable";
 import { Button, Popconfirm, TableColumnsType, message } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { deleteCommentRequest } from "@/utils/api";
-import { getCommentListAsync, selectCommentData, selectCommentLoading } from "@/store/slices/commentSlice";
+import {
+  getCommentListAsync,
+  selectCommentData,
+  selectCommentLoading,
+} from "@/store/slices/commentSlice";
 
-import s from './index.module.scss'
+import s from "./index.module.scss";
 
 const Comment: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -32,14 +36,10 @@ const Comment: React.FC = () => {
             pagesize: 10,
             current: 1,
           });
-        } else {
-          messageApi.error("出错了，删除失败");
         }
       },
     }
   );
-
-
 
   const handleDelete = (_id: string) => {
     deleteRun({ _id });
@@ -76,25 +76,21 @@ const Comment: React.FC = () => {
       align: "center",
       dataIndex: "from",
       render: (value) => {
-        return <div className={s.typeBox}>
-          <div
-            className={value === 'article' ? s.comment : s.msg}
-          >
-            {value === 'article' ? '文章评论' : '留言板'}
+        return (
+          <div className={s.typeBox}>
+            <div className={value === "article" ? s.comment : s.msg}>
+              {value === "article" ? "文章评论" : "留言板"}
+            </div>
           </div>
-        </div>
-      }
+        );
+      },
     },
     {
       title: "操作",
       align: "center",
       render: (_, record) => (
         <>
-          <Button
-            type="primary"
-            style={{ marginRight: 10 }}
-            onClick={() => { }}
-          >
+          <Button type="primary" style={{ marginRight: 10 }} onClick={() => {}}>
             查看
           </Button>
           <Popconfirm
@@ -113,7 +109,7 @@ const Comment: React.FC = () => {
     },
   ];
 
-  let commentList = commentData.list.map(item => {
+  let commentList = commentData.list.map((item) => {
     if (item.children && item.children.length === 0) {
       let { children, ...rest } = item;
       return rest;
@@ -123,7 +119,6 @@ const Comment: React.FC = () => {
 
   useEffect(() => {
     dispatch(getCommentListAsync(pageParams));
-
   }, [pageParams]);
   return (
     <>
@@ -147,4 +142,3 @@ const Comment: React.FC = () => {
 };
 
 export default Comment;
-

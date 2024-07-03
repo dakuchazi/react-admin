@@ -4,16 +4,19 @@ import CustomModal from "@/components/CustomModal";
 import ImgView from "@/components/ImgView";
 import MyTable from "@/components/MyTable";
 import PageHeader from "@/components/PageHeader";
-import {
-  Button,
-  Input,
-  Popconfirm,
-  TableColumnsType,
-  message,
-} from "antd";
+import { Button, Input, Popconfirm, TableColumnsType, message } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { getWorkListAsync, selectWorkData, selectWorkLoading } from "@/store/slices/workSlice";
-import { addWorkRequest, deletePostRequest, deleteWorkRequest, updateWorkRequest } from "@/utils/api";
+import {
+  getWorkListAsync,
+  selectWorkData,
+  selectWorkLoading,
+} from "@/store/slices/workSlice";
+import {
+  addWorkRequest,
+  deletePostRequest,
+  deleteWorkRequest,
+  updateWorkRequest,
+} from "@/utils/api";
 
 import s from "./index.module.scss";
 
@@ -30,16 +33,16 @@ const Work: React.FC = () => {
     createDate: string;
     name: string;
     cover: string;
-    description: string
-    link: string
+    description: string;
+    link: string;
     _id: string;
   }>({
-    createDate: '',
-    name: '',
-    cover: '',
-    description: '',
-    link: '',
-    _id: ''
+    createDate: "",
+    name: "",
+    cover: "",
+    description: "",
+    link: "",
+    _id: "",
   });
   const [pageParams, setPageParams] = useSetState<{
     pagesize: number;
@@ -64,8 +67,6 @@ const Work: React.FC = () => {
               await dispatch(getWorkListAsync({ current: 1, pagesize: 10 }));
               setIsModalOpen(false);
             });
-        } else {
-          messageApi.error("操作出错了");
         }
       },
     }
@@ -86,8 +87,6 @@ const Work: React.FC = () => {
               await dispatch(getWorkListAsync({ current: 1, pagesize: 10 }));
               setIsModalOpen(false);
             });
-        } else {
-          messageApi.error("操作出错了");
         }
       },
     }
@@ -104,8 +103,6 @@ const Work: React.FC = () => {
             pagesize: 10,
             current: 1,
           });
-        } else {
-          messageApi.error("出错了，删除失败");
         }
       },
     }
@@ -118,12 +115,12 @@ const Work: React.FC = () => {
   useEffect(() => {
     if (!isModalOpen) {
       setWorkDetail({
-        createDate: '',
-        name: '',
-        cover: '',
-        description: '',
-        link: '',
-        _id: ''
+        createDate: "",
+        name: "",
+        cover: "",
+        description: "",
+        link: "",
+        _id: "",
       });
     }
   }, [isModalOpen]);
@@ -137,8 +134,8 @@ const Work: React.FC = () => {
     _id: string;
     name: string;
     cover: string;
-    description: string
-    link: '',
+    description: string;
+    link: "";
   }) => {
     setIsModalOpen(true);
     setIsEdit(true);
@@ -169,43 +166,42 @@ const Work: React.FC = () => {
 
   const dataFilter = [
     {
-      text: '名称',
+      text: "名称",
       data: workDetail.name,
       setData: (value: any) => setWorkDetail({ name: value }),
-      require: true
+      require: true,
     },
     {
-      text: '链接',
+      text: "链接",
       data: workDetail.link,
       setData: (value: any) => setWorkDetail({ link: value }),
-      require: true
+      require: true,
     },
     {
-      text: '封面',
+      text: "封面",
       data: workDetail.cover,
       setData: (value: any) => setWorkDetail({ cover: value }),
-      require: true
+      require: true,
     },
     {
-      text: '描述',
+      text: "描述",
       data: workDetail.description,
       setData: (value: any) => setWorkDetail({ description: value }),
-      require: true
-    }
+      require: true,
+    },
   ];
 
-  const render = () => (
+  const render = () =>
     dataFilter.map(({ text, data, setData }, index) => (
       <Input
-        size='large'
+        size="large"
         key={index}
         addonBefore={text}
         value={data as string}
         onChange={(e) => setData(e.target.value)}
         className={s.modalInput}
       />
-    ))
-  );
+    ));
 
   const columns: TableColumnsType = [
     {
@@ -231,7 +227,7 @@ const Work: React.FC = () => {
         <div className={s.tableCoverBox}>
           <img
             src={cover}
-            alt='cover'
+            alt="cover"
             className={s.tableCover}
             onClick={() => onClickImg(cover)}
           />
@@ -309,5 +305,4 @@ const Work: React.FC = () => {
   );
 };
 
-export default Work
-
+export default Work;

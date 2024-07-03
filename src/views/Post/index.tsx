@@ -22,7 +22,11 @@ import {
   selectPostLoading,
 } from "@/store/slices/postSlice";
 import { FileImageOutlined } from "@ant-design/icons";
-import { addPostRequest, deletePostRequest, updatePostRequest } from "@/utils/api";
+import {
+  addPostRequest,
+  deletePostRequest,
+  updatePostRequest,
+} from "@/utils/api";
 
 import s from "./index.module.scss";
 
@@ -69,8 +73,6 @@ const Say: React.FC = () => {
               await dispatch(getPostListAsync({ current: 1, pagesize: 10 }));
               setIsModalOpen(false);
             });
-        } else {
-          messageApi.error("操作出错了");
         }
       },
     }
@@ -91,8 +93,6 @@ const Say: React.FC = () => {
               await dispatch(getPostListAsync({ current: 1, pagesize: 10 }));
               setIsModalOpen(false);
             });
-        } else {
-          messageApi.error("操作出错了");
         }
       },
     }
@@ -109,8 +109,6 @@ const Say: React.FC = () => {
             pagesize: 10,
             current: 1,
           });
-        } else {
-          messageApi.error("出错了，删除失败");
         }
       },
     }

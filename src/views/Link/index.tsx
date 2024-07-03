@@ -10,9 +10,13 @@ import {
   selectLinkData,
   selectLinkLoading,
 } from "@/store/slices/linkSlice";
-import { addLinkRequest, deleteLinkRequest, updateLinkRequest } from "@/utils/api";
+import {
+  addLinkRequest,
+  deleteLinkRequest,
+  updateLinkRequest,
+} from "@/utils/api";
 
-import s from './index.module.scss';
+import s from "./index.module.scss";
 
 const Link: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,8 +64,6 @@ const Link: React.FC = () => {
               await dispatch(getLinkListAsync({ current: 1, pagesize: 10 }));
               setIsModalOpen(false);
             });
-        } else {
-          messageApi.error("操作出错了");
         }
       },
     }
@@ -82,8 +84,6 @@ const Link: React.FC = () => {
               await dispatch(getLinkListAsync({ current: 1, pagesize: 10 }));
               setIsModalOpen(false);
             });
-        } else {
-          messageApi.error("操作出错了");
         }
       },
     }
@@ -100,8 +100,6 @@ const Link: React.FC = () => {
             pagesize: 10,
             current: 1,
           });
-        } else {
-          messageApi.error("出错了，删除失败");
         }
       },
     }
@@ -109,7 +107,6 @@ const Link: React.FC = () => {
 
   useEffect(() => {
     dispatch(getLinkListAsync(pageParams));
-
   }, [pageParams]);
 
   useEffect(() => {
@@ -175,7 +172,7 @@ const Link: React.FC = () => {
       align: "center",
       dataIndex: "avatar",
       render: (avatar: string) => (
-        <img src={avatar} alt="img" style={{ width: '50px' }} />
+        <img src={avatar} alt="img" style={{ width: "50px" }} />
       ),
     },
     {
@@ -211,47 +208,44 @@ const Link: React.FC = () => {
     },
   ];
 
-
   const dataFilter = [
     {
-      text: '名称',
+      text: "名称",
       data: linkDetail.name,
       setData: (value: any) => setLinkDetail({ name: value }),
-      require: true
+      require: true,
     },
     {
-      text: '链接',
+      text: "链接",
       data: linkDetail.link,
       setData: (value: any) => setLinkDetail({ link: value }),
-      require: true
+      require: true,
     },
     {
-      text: '头像',
+      text: "头像",
       data: linkDetail.avatar,
       setData: (value: any) => setLinkDetail({ avatar: value }),
-      require: true
+      require: true,
     },
     {
-      text: '描述',
+      text: "描述",
       data: linkDetail.description,
       setData: (value: any) => setLinkDetail({ description: value }),
-      require: true
-    }
+      require: true,
+    },
   ];
 
-
-  const render = () => (
+  const render = () =>
     dataFilter.map(({ text, data, setData }, index) => (
       <Input
-        size='large'
+        size="large"
         key={index}
         addonBefore={text}
         value={data as string}
         onChange={(e) => setData(e.target.value)}
         className={s.modalInput}
       />
-    ))
-  );
+    ));
 
   return (
     <>

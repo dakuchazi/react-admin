@@ -40,8 +40,6 @@ const AddArticle: React.FC = () => {
           .then(() => {
             navigate("/article");
           });
-      } else {
-        messageApi.error("操作出错了");
       }
     },
   });
@@ -60,8 +58,6 @@ const AddArticle: React.FC = () => {
             .then(() => {
               navigate("/article");
             });
-        } else {
-          messageApi.error("操作出错了");
         }
       },
     }
