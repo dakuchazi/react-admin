@@ -5,8 +5,9 @@ import App from "./App";
 import { HashRouter as Router } from "react-router-dom";
 import { ConfigProvider } from "antd";
 // import reportWebVitals from './reportWebVitals';
-import "./index.css";
 import { PersistGate } from "redux-persist/integration/react";
+
+import "./index.css";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);

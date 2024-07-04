@@ -29,8 +29,7 @@ const Login: React.FC = () => {
 
     if (res.code === "200") {
       localStorage.setItem("token", res.data.access_token);
-      localStorage.setItem("username", username);
-
+      dispatch(getUserInfoAsync({ username }));
       navigate("/");
     }
   };
