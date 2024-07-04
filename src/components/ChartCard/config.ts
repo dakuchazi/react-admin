@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "@/store";
-import {} from "@/store/slices/homeSlice";
 import {
   getTypeListAsync,
   selectTypeData,

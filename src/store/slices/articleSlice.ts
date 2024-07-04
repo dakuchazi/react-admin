@@ -25,7 +25,7 @@ const initialState: {
     createDate: "",
     content: "",
     typeId: "",
-    isDraft: true,
+    isDraft: false,
     _id: "",
   },
   articleDetailLoading: true,

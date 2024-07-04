@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
-import { PostData, getLinkListRequest, getPostListRequest } from "@/utils/api";
+import { LinkData, getLinkListRequest } from "@/utils/api";
 
 const initialState: {
-  linkData: PostData;
+  linkData: LinkData;
   linkLoading: boolean;
 } = {
   linkData: {
@@ -13,7 +13,7 @@ const initialState: {
   linkLoading: true,
 };
 
-export const getLinkListAsync = createAsyncThunk<PostData, any>(
+export const getLinkListAsync = createAsyncThunk<LinkData, any>(
   "post/LinkData",
   async (params, api) => {
     const res = await getLinkListRequest(params);

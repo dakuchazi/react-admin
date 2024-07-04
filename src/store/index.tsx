@@ -1,6 +1,9 @@
 // @/store/index.ts
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import storage from "redux-persist/lib/storage"; // 使用 localStorage 作为默认存储机制
+import { persistStore, persistReducer } from "redux-persist";
+import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2"; // 合并状态的策略
 import layoutReducer from "./slices/layoutSlice";
 import homeReducer from "./slices/homeSlice";
 import noticeReducer from "./slices/noticeSlice";
@@ -24,6 +27,13 @@ export type AppThunk<RetruenType = void> = ThunkAction<
   Action<string>
 >;
 
+// 配置持久化
+const persistConfig = {
+  key: "root",
+  storage,
+  stateReconciler: autoMergeLevel2,
+};
+
 export const store = configureStore({
   reducer: {
     layout: layoutReducer,
@@ -41,6 +51,8 @@ export const store = configureStore({
     user: userReducer,
   },
 });
+
+export const persistor = persistStore(store);
 
 // 只是加上了类型定义
 export const useAppDispatch = () => useDispatch<AppDispatch>();

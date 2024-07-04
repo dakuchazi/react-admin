@@ -88,6 +88,7 @@ const AddArticle: React.FC = () => {
       updateRun({ ...articleDetail, isDraft: false });
     } else {
       delete params._id;
+
       addRun(params);
     }
   };

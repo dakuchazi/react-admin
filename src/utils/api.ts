@@ -22,7 +22,7 @@ export const loginRequest = (params: {
 export const findUserRequest = (params: { username: string }) => {
   return new Promise(async (resovle, reject) => {
     const res: AxiosData<any> = await axios.post("/api/user/findUser", params);
-    resovle(res.data);
+    resovle(res?.data || {});
   }) as Promise<any>;
 };
 
@@ -358,9 +358,11 @@ export type LinkData = {
   list:
     | {
         _id: string;
+        avatar: string;
+        name: string;
+        description: string;
+        link: string;
         createDate: string;
-        content: string;
-        imgs: string[];
       }[]
     | [];
   total: number;
@@ -571,7 +573,7 @@ export const getLogListRequest = (params: {
   }) as Promise<LogData>;
 };
 
-//获取公告列表 /api/about/getAboutList
+//获取关于列表 /api/about/getAboutList
 export const getAboutListRequest = () => {
   return new Promise(async (resovle, reject) => {
     const res: AxiosData = await axios.get("/api/about/getAboutList");
@@ -579,7 +581,7 @@ export const getAboutListRequest = () => {
   }) as Promise<AxiosData>;
 };
 
-//更新公告 /api/about/updateAbout
+//更新关于 /api/about/updateAbout
 export const updateAboutRequest = (parmas: {
   myself: string;
   website: string;

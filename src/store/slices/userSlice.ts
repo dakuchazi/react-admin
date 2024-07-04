@@ -23,7 +23,7 @@ const initialState = {
         },
       ],
     },
-    { label: "说说", path: "/post", icon: "MessageOutlined", isShow: false },
+    { label: "说说", path: "/post", icon: "MessageOutlined", isShow: true },
     {
       label: "留言板",
       path: "/comment",
