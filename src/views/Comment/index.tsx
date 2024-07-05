@@ -74,13 +74,16 @@ const Comment: React.FC = () => {
     {
       title: "来源",
       align: "center",
-      dataIndex: "from",
-      render: (value) => {
+      render: (_, record) => {
         return (
           <div className={s.typeBox}>
-            <div className={value === "article" ? s.comment : s.msg}>
-              {value === "article" ? "文章评论" : "留言板"}
+            <div
+              className={record.from === "art" ? s.comment : s.msg}
+              style={record.pid ? { marginRight: 5 } : {}}
+            >
+              {record.from === "art" ? "文章评论" : "留言板"}
             </div>
+            {record.pid && <div className={s.reply}>回复</div>}
           </div>
         );
       },
