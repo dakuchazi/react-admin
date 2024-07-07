@@ -89,7 +89,7 @@ const AddArticle: React.FC = () => {
     } else {
       delete params._id;
 
-      addRun(params);
+      addRun({ ...params, isDraft: false });
     }
   };
 
