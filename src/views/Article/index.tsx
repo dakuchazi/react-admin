@@ -119,13 +119,14 @@ const Article: React.FC = () => {
     {
       title: "操作",
       align: "center",
-      render: (_: any, { _id, url }: { _id: string; url: string }) => (
+      render: (_: any, { _id }: { _id: string; }) => (
         <>
           <Button
             type="primary"
             style={{ marginRight: 10 }}
             onClick={() => {
-              console.log("===点击了查看跳转到博客===");
+              console.log("===点击了查看跳转到博客===", _id);
+              window.open('http://blog.xukucha.cn/artDetail?artId=' + _id, '_blank')
             }}
           >
             查看

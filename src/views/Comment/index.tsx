@@ -93,7 +93,7 @@ const Comment: React.FC = () => {
       align: "center",
       render: (_, record) => (
         <>
-          <Button type="primary" style={{ marginRight: 10 }} onClick={() => {}}>
+          <Button type="primary" style={{ marginRight: 10 }} onClick={() => { window.open('http://blog.xukucha.cn/msg') }}>
             查看
           </Button>
           <Popconfirm
