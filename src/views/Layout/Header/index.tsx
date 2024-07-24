@@ -10,7 +10,7 @@ import { Header } from "antd/es/layout/layout";
 import BreadCrumbCp from "./BreadCrumbCp";
 import FullScreen from "@/components/FullScreen";
 import { Link, useNavigate } from "react-router-dom";
-import { selectUserInfo } from "@/store/slices/userSlice";
+import { selectUserInfo, setInfo } from "@/store/slices/userSlice";
 
 import "./index.scss";
 
@@ -39,12 +39,15 @@ export default function HeaderCp() {
       ),
     },
     {
-      key: "loyout",
+      key: "loyout", 
       danger: true,
       label: "注销",
       onClick: () => {
         localStorage.removeItem("token");
         navigate("/login");
+        dispath(setInfo({ name: "",
+          role: "",
+          avatar: ""}))
       },
     },
   ];
@@ -82,3 +85,4 @@ export default function HeaderCp() {
     </>
   );
 }
+

@@ -69,11 +69,11 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     //同步修改state
-    seInfo(state) {
-      state.info = state.info;
+    setInfo(state,actions) {
+      state.info = actions.payload;
     },
-    setRoutes(state) {
-      state.routes = state.routes;
+    setRoutes(state,actions) {
+      state.routes = actions.payload;
     },
   },
 
@@ -93,6 +93,8 @@ const userSlice = createSlice({
       });
   },
 });
+
+export const {setInfo,setRoutes}  = userSlice.actions
 
 export const selectUserInfo = (state: RootState) => {
   return state.user.info;
